@@ -6,4 +6,31 @@ Based on the [backup of vCoDMods](https://vcodmods.com/client/iw1x-client-source
 
 Aiming to be more lightweight, removing some features of the backup
 
-**Focused on making aiming/looking more efficient than the original game**
+**The mod is focused on improving aiming/looking**
+
+---
+## Build and Run
+
+Using Windows
+- Install git: https://git-scm.com/ (leave default options)
+- Install Visual Studio Community: https://visualstudio.microsoft.com/vs/community/
+
+In Visual Studio Installer > Individual components, install these:
+
+<img width="377" height="145" alt="vs components" src="https://github.com/user-attachments/assets/6e4336a1-e552-41ca-83ee-fb90e4b526af" />
+
+(maybe Windows 10 SDK instead if you are on Win10)
+
+Open a terminal on your desktop, then:
+
+- `git clone https://github.com/cod1raph/iw1x-client-r.git`
+- `cd iw1x-client-r`
+- `git submodule update --init --recursive`
+- Close terminal, open `generate.bat`
+- In `build` folder, open `iw1x-client-r.sln`
+- Ignore setup assistant
+- Select the `Release` config on top (click Debug next to Win32)
+- On top: Build > Build Solution
+- Close VS, go to `iw1x-client-r\build\bin\Release`
+- Copy `iw1x-r` app in CoD folder, next to `CoDMP`
+- Run `iw1x-r`, menu shortcut is Alt+Esc
