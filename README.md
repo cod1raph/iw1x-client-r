@@ -42,3 +42,17 @@ Open a terminal on your desktop, then:
 - Close VS, go to `iw1x-client-r\build\bin\Release`
 - Copy `iw1x-r` app in CoD folder, next to `CoDMP`
 - Run `iw1x-r`
+
+---
+---
+## References
+- [Killtube](https://killtube.org/)
+- The [reverse engineering Discord server](https://discord.com/invite/weKN5wb)
+- [codextended-client](https://github.com/xtnded/codextended-client)
+- [CoD4x_Client_pub](https://github.com/callofduty4x/CoD4x_Client_pub)
+- [CoDPlusPlus](https://github.com/kartjom/CoDPlusPlus)
+- [iw4x-client](https://github.com/iw4x/iw4x-client)
+- [AlterWare](https://alterware.dev/) & [Aurora](https://auroramod.dev/)
+- [RTCW-MP](https://github.com/id-Software/RTCW-MP/)
+- [Ghidra](https://github.com/NationalSecurityAgency/ghidra) & [IDA Free](https://hex-rays.com/ida-free)
+- [ChatGPT](https://chatgpt.com/)
