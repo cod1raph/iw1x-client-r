@@ -22,7 +22,7 @@ static void MSG_ERR(const char* msg)
 
 static LONG WINAPI CrashLogger(EXCEPTION_POINTERS* exceptionPointers)
 {
-    std::string crashFilename = "iw1x-r_crash.log";
+    std::string crashFilename = std::string(MOD_NAME) + "_crash.log";
     std::ofstream logFile(crashFilename);
     if (logFile.is_open())
     {
