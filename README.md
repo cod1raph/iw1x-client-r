@@ -3,7 +3,7 @@ Based on the [backup of vCoDMods](https://vcodmods.com/client/iw1x-client-source
 
 **This mod is focused on improving aiming/looking**
 
-*-r* as my name to be distinguishable from other forks, and meaning it's intended to provide only the features I'm currently interested about
+*-r* as my name meaning it's intended to provide only the features I'm currently interested about
 
 Some features are:
 - ADS sensitivity scale
