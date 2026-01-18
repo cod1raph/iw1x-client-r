@@ -1,13 +1,19 @@
-## CoD 1.1 client mod
-
+## CoD1.1 client mod
 Based on the [backup of vCoDMods](https://vcodmods.com/client/iw1x-client-source)
 
-*-r* as my name to be distinguishable from other forks, and meaning it's not intended for global usage like before, but for my current needs
+**This mod is focused on improving aiming/looking**
 
-Aiming to be more lightweight, removing some features of the backup
+*-r* as my name to be distinguishable from other forks, and meaning it's intended to provide only the features I'm currently interested about
 
-**The mod is focused on improving aiming/looking**
-
+Some features are:
+- ADS sensitivity scale
+- FOV scale
+- Raw mouse input
+- Alt+Tab support
+- Instant lookback command (180°)
+- Connection interrupted indicator hiding
+- Prevent server forcing downloading
+---
 ---
 ## Build and Run
 
