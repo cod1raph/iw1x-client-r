@@ -12,6 +12,9 @@ Some features are:
 - Alt+Tab support
 - `lookback` command (180°)
 - Prevent server forcing downloading
+
+**Menu key: Alt+Esc**
+
 ---
 ---
 ## Build and Run
@@ -38,4 +41,4 @@ Open a terminal on your desktop, then:
 - On top: Build > Build Solution
 - Close VS, go to `iw1x-client-r\build\bin\Release`
 - Copy `iw1x-r` app in CoD folder, next to `CoDMP`
-- Run `iw1x-r`, menu shortcut is Alt+Esc
+- Run `iw1x-r`
