@@ -16,7 +16,7 @@
 
 namespace window
 {
-	extern char sys_cmdline[stock::MAX_STRING_CHARS];
+    extern char sys_cmdline[stock::MAX_STRING_CHARS];
 
-	void MSG(const std::string& text, UINT flags = MB_OK);
+    void MSG(const std::string& text, UINT flags = MB_OK);
 }

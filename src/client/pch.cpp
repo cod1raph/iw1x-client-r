@@ -19,6 +19,6 @@ char payload_data[BINARY_PAYLOAD_SIZE];
 
 extern "C"
 {
-	__declspec(dllexport) DWORD NvOptimusEnablement = 1;
-	__declspec(dllexport) DWORD AmdPowerXpressRequestHighPerformance = 1;
+    __declspec(dllexport) DWORD NvOptimusEnablement = 1;
+    __declspec(dllexport) DWORD AmdPowerXpressRequestHighPerformance = 1;
 };

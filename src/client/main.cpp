@@ -181,30 +181,30 @@ static bool compare_md5(const std::string& data, const std::string& expected_has
 
 static bool read_file(const std::string& file, std::string* data)
 {
-	if (!data)
+    if (!data)
         return false;
-	data->clear();
+    data->clear();
 
-	if (std::ifstream(file).good())
-	{
-		std::ifstream stream(file, std::ios::binary);
-		if (!stream.is_open())
+    if (std::ifstream(file).good())
+    {
+        std::ifstream stream(file, std::ios::binary);
+        if (!stream.is_open())
             return false;
 
-		stream.seekg(0, std::ios::end);
-		const std::streamsize size = stream.tellg();
-		stream.seekg(0, std::ios::beg);
+        stream.seekg(0, std::ios::end);
+        const std::streamsize size = stream.tellg();
+        stream.seekg(0, std::ios::beg);
 
-		if (size > -1)
-		{
-			data->resize(static_cast<uint32_t>(size));
-			stream.read(data->data(), size);
-			stream.close();
-			return true;
-		}
-	}
+        if (size > -1)
+        {
+            data->resize(static_cast<uint32_t>(size));
+            stream.read(data->data(), size);
+            stream.close();
+            return true;
+        }
+    }
 
-	return false;
+    return false;
 }
 
 static FARPROC load_binary()
