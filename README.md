@@ -11,7 +11,6 @@ Some features are:
 - Raw mouse input
 - Alt+Tab support
 - Instant lookback command (180°)
-- Connection interrupted indicator hiding
 - Prevent server forcing downloading
 ---
 ---
