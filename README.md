@@ -10,7 +10,7 @@ Some features are:
 - FOV scale
 - Raw mouse input
 - Alt+Tab support
-- Instant lookback command (180°)
+- `lookback` command (180°)
 - Prevent server forcing downloading
 ---
 ---
