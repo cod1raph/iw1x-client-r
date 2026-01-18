@@ -22,7 +22,7 @@ static void MSG_ERR(const char* msg)
 
 static LONG WINAPI CrashLogger(EXCEPTION_POINTERS* exceptionPointers)
 {
-    std::string crashFilename = "iw1x_crash.log";
+    std::string crashFilename = "iw1x-r_crash.log";
     std::ofstream logFile(crashFilename);
     if (logFile.is_open())
     {
@@ -41,7 +41,7 @@ static LONG WINAPI CrashLogger(EXCEPTION_POINTERS* exceptionPointers)
         logFile << "Exception Address: 0x" << std::hex << exceptionAddress << std::endl;
         logFile << "Exception Code: 0x" << std::hex << exceptionCode << std::endl;
 
-        std::string errorMessage = "A crash occured, " + crashFilename + " available in game folder.";
+        std::string errorMessage = "A crash occured, " + crashFilename + " available in your CoD folder.";
 
         MSG_ERR(errorMessage.c_str());
     }

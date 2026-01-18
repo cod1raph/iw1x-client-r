@@ -89,8 +89,6 @@ namespace utils::hook
 
     void nop(const size_t place, const size_t length)
     {
-        //int len = (length < place) ? length : (length - place);
-
         nop(reinterpret_cast<void*>(place), length);
     }
     

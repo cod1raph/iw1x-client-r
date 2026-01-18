@@ -38,21 +38,6 @@ namespace stock
 	WEAK adjuster<cvar_t[]> cvar_indexes{ 0x0163b420 };
 	WEAK adjuster<netadr_t> clc_serverAddress{ 0x015ce86c };
 	WEAK adjuster<netadr_t> cls_autoupdateServer{ 0x015ca57c };
-
-
-
-
-
-	WEAK adjuster<clientActive_t> cl{ 0x01432960 };
-
-
-
-	WEAK adjuster<vm_t*> uivm{ 0x0161747c };
-
-
-
-	
-	//WEAK adjuster<int> ping{ 0x41405d };
 }
 
 namespace cvars

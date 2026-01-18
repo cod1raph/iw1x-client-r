@@ -5,7 +5,6 @@ namespace stock
 	weaponInfo_t* BG_GetInfoForWeapon(int weaponNum);
 	const char* Info_ValueForKey(const char* buffer, const char* key);
 	void CL_MouseEvent(int _dx, int _dy);
-	void PM_ClipVelocity(vec3_t _in, vec3_t normal, vec3_t _out, float overbounce);
 
 	WEAK adjuster<void(float x, float y, int fontID, float scale, float* color, const char* text, float spaceBetweenChars, int maxChars, int arg9)> SCR_DrawString{ 0x004df570 };
 	WEAK adjuster<cvar_t* (const char* name)> Cvar_FindVar{ 0x00439280 };
@@ -20,22 +19,5 @@ namespace stock
 	WEAK adjuster<const char*(netadr_t a)> NET_AdrToString{ 0x00449150 };
 	WEAK adjuster<qboolean(netadr_t a, netadr_t b)> NET_CompareAdr{ 0x00449230 };
 	WEAK adjuster<void(float x, float y, float width, float height, qhandle_t hShader)> CG_DrawPic{ 0x300192d0, BASE_CGAME_MP };
-
-
-
-
-
-
 	WEAK adjuster<int(vm_t* vm, int callnum, ...)> VM_Call{ 0x00460480 };
-
-
-
-
-
-
-
-	//WEAK adjuster<void(float x, float y, float width, float height, qhandle_t hShader)> SCR_DrawPic{ 0x004168d0 };
-	//WEAK adjuster<void(float x, float y, const char* s, float alpha)> CG_DrawBigString{ 0x30019710, BASE_CGAME_MP };
-	//WEAK adjuster<void(const char* msg, ...)> Com_Printf{ 0x004357b0 };
-	//WEAK adjuster<void()> CL_Disconnect_f{ 0x0040f5f0 };
 }

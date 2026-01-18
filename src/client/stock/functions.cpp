@@ -44,18 +44,4 @@ namespace stock
 			add esp, 0x4;
 		}
 	}
-	
-	void PM_ClipVelocity(vec3_t _in, vec3_t normal, vec3_t _out, float overbounce)
-	{
-		uintptr_t addr_PM_ClipVelocity = ABSOLUTE_CGAME_MP(0x30007380);
-		__asm
-		{
-			push overbounce;
-			mov esi, _out;
-			mov ecx, normal;
-			mov edx, _in;
-			call addr_PM_ClipVelocity;
-			add esp, 0x4;
-		}
-	}
 }

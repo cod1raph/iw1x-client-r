@@ -249,55 +249,6 @@ namespace window
 		ShowWindow(*stock::hWnd, SW_MINIMIZE);
 	}
 	
-	
-	
-	
-	
-	
-	
-
-	utils::hook::detour hook_CL_MouseEvent;
-	static void _CL_MouseEvent(int dx, int dy)
-	{
-		std::stringstream ss;
-		ss << "####### dx: " << dx << ", dy: " << dy << std::endl;
-		OutputDebugString(ss.str().c_str());
-		
-		if (*stock::cls_keyCatchers & stock::KEYCATCH_UI)
-		{
-			if (cvars::cl_bypassMouseInput->integer == 1)
-			{
-				stock::cl->mouseDx[stock::cl->mouseIndex] += dx;
-				stock::cl->mouseDy[stock::cl->mouseIndex] += dy;
-			}
-			else
-			{
-				stock::VM_Call(*stock::uivm, 4, dx, dy); // UI_MOUSE_EVENT
-			}
-		}
-		else if (*stock::cls_keyCatchers & stock::KEYCATCH_CGAME)
-		{
-			stock::VM_Call(*stock::cgvm, 7, dx, dy); // CG_MOUSE_EVENT
-		}
-		else
-		{
-			stock::cl->mouseDx[stock::cl->mouseIndex] += dx;
-			stock::cl->mouseDy[stock::cl->mouseIndex] += dy;
-		}
-	}
-	static __declspec(naked) void stub_CL_MouseEvent()
-	{
-		__asm
-		{
-			push eax;
-			call _CL_MouseEvent;
-			add esp, 0x4;
-			ret;
-		}
-	}
-
-
-	
 	class component final : public component_interface
 	{
 	public:
@@ -312,15 +263,6 @@ namespace window
 			hook_IN_MouseMove.create(0x00461850, stub_IN_MouseMove);
 			hook_SV_Startup.create(0x00458160, stub_SV_Startup);
 			hook_SV_Shutdown.create(0x00459600, stub_SV_Shutdown);
-
-
-
-			// I was probably testing / attempting mouse raw input via CG_MouseEvent in 2025. It crashes.
-			//hook_CL_MouseEvent.create(0x0040b0a0, stub_CL_MouseEvent);
-
-
-
-
 		}
 	};
 }
