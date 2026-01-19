@@ -140,7 +140,7 @@ namespace ui
             cg_drawWeaponSelect = stock::Cvar_Get("cg_drawWeaponSelect", "1", stock::CVAR_ARCHIVE);
             cg_drawDisconnect = stock::Cvar_Get("cg_drawDisconnect", "1", stock::CVAR_ARCHIVE);
             cg_drawFPS_custom = stock::Cvar_Get("cg_drawFPS_custom", "0", stock::CVAR_ARCHIVE);
-            cg_drawPing = stock::Cvar_Get("cg_drawPing", "0", stock::CVAR_ARCHIVE);			
+            cg_drawPing = stock::Cvar_Get("cg_drawPing", "0", stock::CVAR_ARCHIVE);
 
             scheduler::loop(draw_branding, scheduler::pipeline::renderer);
             scheduler::loop(draw_ping, scheduler::pipeline::cgame);

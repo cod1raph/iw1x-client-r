@@ -38,6 +38,8 @@ namespace cvars
         com_sv_running = stock::Cvar_FindVar("sv_running");
         com_timescale = stock::Cvar_FindVar("timescale");
         sv_cheats = stock::Cvar_FindVar("sv_cheats");
+
+        con_boldgamemessagetime->flags = stock::CVAR_ARCHIVE;
     }
 
     static void stub_CG_RegisterCvars()
