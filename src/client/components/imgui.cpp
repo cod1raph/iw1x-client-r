@@ -35,7 +35,7 @@ namespace imgui
     bool branding = false;
     bool cg_drawPing = false;
 
-    static void _toggle_menu()
+    static void toggle_menu_cmd()
     {
         toggle_menu(false);
     }
@@ -356,7 +356,7 @@ namespace imgui
 
         void post_unpack() override
         {
-            stock::Cmd_AddCommand("imgui", _toggle_menu);
+            stock::Cmd_AddCommand("imgui", toggle_menu_cmd);
         }
         
         void pre_destroy() override
