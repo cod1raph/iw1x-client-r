@@ -143,4 +143,11 @@ namespace stock
         float zoomSensitivity;
         // ...
     } cg_t;
+    
+    typedef struct
+    {
+        byte gap_0x0[0x8040];
+        vec3_t viewangles;
+        // ...
+    } clientActive_t;
 }

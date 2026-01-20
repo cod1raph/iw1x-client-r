@@ -12,7 +12,7 @@ namespace movement
     
     static void Cmd_LookBack()
     {
-        stock::viewangles[stock::YAW] += 180;
+        stock::cl->viewangles[stock::YAW] += 180;
     }
     
     static float originalCGZoomSensitivity()

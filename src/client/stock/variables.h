@@ -22,7 +22,6 @@ namespace stock
     WEAK adjuster<HWND> hWnd{ 0x16C35E8 };
     WEAK adjuster<int> cmd_argc{ 0x008930f0 };
     WEAK adjuster<char*> cmd_argv{ 0x00890bf0 };
-    WEAK adjuster<float> viewangles{ 0x0143a9a0 };
     WEAK adjuster<float> ads_progress{ 0x30207214, BASE_CGAME_MP }; // Between 0 and 1, might be cg.zoomTime
     WEAK adjuster<float> fov_visible{ 0x3020958c, BASE_CGAME_MP }; // Not the cg_fov cvar value, might be cg.zoomval
     WEAK adjuster<pmove_t*> pm{ 0x3019d570, BASE_CGAME_MP };
@@ -38,6 +37,7 @@ namespace stock
     WEAK adjuster<netadr_t> clc_serverAddress{ 0x015ce86c };
     WEAK adjuster<netadr_t> cls_autoupdateServer{ 0x015ca57c };
     WEAK adjuster<cg_t> cg{ 0x301e2140, BASE_CGAME_MP };
+    WEAK adjuster<clientActive_t> cl{ 0x01432960 };
 }
 
 namespace cvars
