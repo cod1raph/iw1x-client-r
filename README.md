@@ -11,7 +11,6 @@ Some features are:
 - Raw mouse input
 - Alt+Tab support
 - `lookback` command
-- Prevent server forcing downloading
 ---
 ---
 ## Build and Run
