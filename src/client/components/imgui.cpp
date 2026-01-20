@@ -321,7 +321,7 @@ namespace imgui
     class component final : public component_interface
     {
     public:
-        void* load_import(const std::string&, const std::string& function) override
+        void* load_import(const std::string&, const std::string& function) noexcept override
         {
             if (function == "SwapBuffers")
                 return stub_SwapBuffers;

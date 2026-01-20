@@ -22,7 +22,7 @@ namespace stock
         return reinterpret_cast<weaponInfo_t**>(cg_weapons_ptr)[weaponNum];
     }
     
-    const char* Info_ValueForKey(const char* buffer, const char* key)
+    const char* Info_ValueForKey(const char* buffer, const char* key) noexcept
     {
         __asm
         {
@@ -33,7 +33,7 @@ namespace stock
         }
     }
     
-    void CL_MouseEvent(int _dx, int _dy)
+    void CL_MouseEvent(int _dx, int _dy) noexcept
     {
         __asm
         {

@@ -15,59 +15,53 @@ namespace movement
         stock::viewangles[stock::YAW] += 180;
     }
     
-    static float originalCgZoomSensitivity()
+    static float originalCGZoomSensitivity()
     {
         return *stock::fov_visible / cvars::vm::cg_fov->value; // See 30032fe8
     }
     
-    static float scaledCgZoomSensitivity()
+    static float scaledCGZoomSensitivity()
     {
-        bool weaponIsSniper = false;
-
         if (!*stock::pm)
-            return originalCgZoomSensitivity();
+            return originalCGZoomSensitivity();
         
-        int weapon = (*stock::pm)->ps->weapon;
-        stock::weaponInfo_t* weaponInfo = stock::BG_GetInfoForWeapon(weapon);
-
-        if (*weaponInfo->adsOverlayShader)
-            weaponIsSniper = true;
+        stock::weaponInfo_t* weaponInfo = stock::BG_GetInfoForWeapon((*stock::pm)->ps->weapon);
         
-        if (weaponIsSniper)
+        if (*weaponInfo->adsOverlayShader) // sniper
         {
             if (sensitivity_adsScaleSniperEnable->integer)
-                return originalCgZoomSensitivity() * sensitivity_adsScaleSniper->value;
+                return originalCGZoomSensitivity() * sensitivity_adsScaleSniper->value;
             else
-                return originalCgZoomSensitivity();
+                return originalCGZoomSensitivity();
         }
         else if (sensitivity_adsScaleEnable->integer)
-            return originalCgZoomSensitivity() * sensitivity_adsScale->value;
+            return originalCGZoomSensitivity() * sensitivity_adsScale->value;
         else
-            return originalCgZoomSensitivity();
+            return originalCGZoomSensitivity();
     }
 
     static void cg_zoomSensitivity_scale() // See 30032e20
     {
         if (*stock::ads_progress == 1)
         {
-            stock::cg->zoomSensitivity = scaledCgZoomSensitivity();
+            stock::cg->zoomSensitivity = scaledCGZoomSensitivity();
         }
         else if (*stock::ads_progress != 0)
         {
             auto unknown = (bool*)ABSOLUTE_CGAME_MP(0x30209458); // True when zoomed out before max in, = "ads aborted"?
 
             if (*unknown)
-                stock::cg->zoomSensitivity = scaledCgZoomSensitivity();
+                stock::cg->zoomSensitivity = scaledCGZoomSensitivity();
             else
-                stock::cg->zoomSensitivity = originalCgZoomSensitivity();
+                stock::cg->zoomSensitivity = originalCGZoomSensitivity();
         }
         else
         {
-            stock::cg->zoomSensitivity = originalCgZoomSensitivity();
+            stock::cg->zoomSensitivity = originalCGZoomSensitivity();
         }
     }
     
-    static __declspec(naked) void stub_cg_zoomSensitivity_calculation()
+    static __declspec(naked) void stub_CG_zoomSensitivity_calculation() noexcept
     {
         __asm
         {
@@ -93,7 +87,7 @@ namespace movement
 
         void post_cgame() override
         {
-            utils::hook::jump(ABSOLUTE_CGAME_MP(0x30032fe8), stub_cg_zoomSensitivity_calculation);
+            utils::hook::jump(ABSOLUTE_CGAME_MP(0x30032fe8), stub_CG_zoomSensitivity_calculation);
         }
     };
 }

@@ -13,7 +13,7 @@ namespace fixes
 
     uintptr_t pfield_charevent_return = 0x40CB77;
     uintptr_t pfield_charevent_continue = 0x40CB23;
-    static __declspec(naked) void stub_Field_CharEvent_ignore_console_char()
+    static __declspec(naked) void stub_Field_CharEvent_ignore_console_char() noexcept
     {
         // See https://github.com/xtnded/codextended-client/blob/45af251518a390ab08b1c8713a6a1544b70114a1/cl_input.cpp#L77
 

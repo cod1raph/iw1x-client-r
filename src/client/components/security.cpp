@@ -21,7 +21,7 @@ namespace security
         "timescale",
     };
 
-    static bool cvarIsInWhitelist(const char* cvar_name)
+    static bool cvarIsInWhitelist(const char* cvar_name) noexcept
     {
         for (const auto& str : cvarsWritable_whiteList)
             if (!_stricmp(str.c_str(), cvar_name))

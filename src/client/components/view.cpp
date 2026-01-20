@@ -19,7 +19,7 @@ namespace view
         return fov;
     }
     
-    static __declspec(naked) void stub_CG_CalcFov_return()
+    static __declspec(naked) void stub_CG_CalcFov_return() noexcept
     {
         __asm
         {
