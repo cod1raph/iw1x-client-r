@@ -228,7 +228,7 @@ static FARPROC load_binary()
     hook_GetModuleFileNameW.create(kernel32.get_proc<DWORD(WINAPI*)(HMODULE, LPWSTR, DWORD)>("GetModuleFileNameW"), stub_GetModuleFileNameW);
     hook_GetModuleFileNameA.create(kernel32.get_proc<DWORD(WINAPI*)(HMODULE, LPSTR, DWORD)>("GetModuleFileNameA"), stub_GetModuleFileNameA);
     
-    // Check if the CoD file is named mohaa
+    // Check if CoDMP is named mohaa
     std::filesystem::path currentPath_mohaa_test = std::filesystem::current_path() / "mohaa.exe";
     if (std::ifstream(currentPath_mohaa_test.string()).good())
         clientNamedMohaa = true;

@@ -35,10 +35,10 @@ namespace ui
         int* clSnap_ping = (int*)0x0143b148; // TODO: Verify and clean
         //int* cl_snap_ping = (int*)0x01432978;
         
-        const auto background_width = 50;
-        const auto background_height = 15;
-        const auto background_x = 640 - background_width;
-        const auto background_y = 25;
+        constexpr auto background_width = 50;
+        constexpr auto background_height = 15;
+        constexpr auto background_x = 640 - background_width;
+        constexpr auto background_y = 25;
         float background_color[4] = {0, 0, 0, 0.6f};
 
         // Draw background

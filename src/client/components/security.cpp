@@ -10,7 +10,7 @@ namespace security
     utils::hook::detour hook_CG_ServerCommand;
     utils::hook::detour hook_CL_NextDownload;
     
-    std::vector<std::string> cvarsWritable_whiteList =
+    std::vector<std::string> cvarWhiteList =
     {
         "g_scriptMainMenu",
         "scr_showweapontab",
@@ -23,7 +23,7 @@ namespace security
 
     static bool cvarIsInWhitelist(const char* cvar_name) noexcept
     {
-        for (const auto& str : cvarsWritable_whiteList)
+        for (const auto& str : cvarWhiteList)
             if (!_stricmp(str.c_str(), cvar_name))
                 return true;
         return false;

@@ -30,7 +30,7 @@ public:
         return reinterpret_cast<T*>(base_address + (reinterpret_cast<uintptr_t>(object) - offset));
     }
 
-    operator T* () const
+    operator T* () const noexcept
     {
         return this->get();
     }
