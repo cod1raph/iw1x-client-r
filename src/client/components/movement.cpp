@@ -15,7 +15,7 @@ namespace movement
         stock::viewangles[stock::YAW] += 180;
     }
     
-    static float originalCgZoomSensitivity() // See 30032fe8
+    static float originalCgZoomSensitivity()
     {
         return *stock::fov_visible / cvars::vm::cg_fov->value; // See 30032fe8
     }
@@ -50,20 +50,20 @@ namespace movement
     {
         if (*stock::ads_progress == 1)
         {
-            *stock::cg_zoomSensitivity = scaledCgZoomSensitivity();
+            stock::cg->zoomSensitivity = scaledCgZoomSensitivity();
         }
         else if (*stock::ads_progress != 0)
         {
             auto unknown = (bool*)ABSOLUTE_CGAME_MP(0x30209458); // True when zoomed out before max in, = "ads aborted"?
 
             if (*unknown)
-                *stock::cg_zoomSensitivity = scaledCgZoomSensitivity();
+                stock::cg->zoomSensitivity = scaledCgZoomSensitivity();
             else
-                *stock::cg_zoomSensitivity = originalCgZoomSensitivity();
+                stock::cg->zoomSensitivity = originalCgZoomSensitivity();
         }
         else
         {
-            *stock::cg_zoomSensitivity = originalCgZoomSensitivity();
+            stock::cg->zoomSensitivity = originalCgZoomSensitivity();
         }
     }
     

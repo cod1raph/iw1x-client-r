@@ -6,10 +6,6 @@ namespace view
 {
     stock::cvar_t* cg_fovScaleEnable;
     stock::cvar_t* cg_fovScale;
-    stock::cvar_t* record_respawn;
-
-    utils::hook::detour hook_CG_Respawn;
-    utils::hook::detour hook_CL_PlayDemo_f;
     
     static float scaledFOV(float fov)
     {

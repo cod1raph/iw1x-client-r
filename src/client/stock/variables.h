@@ -23,7 +23,6 @@ namespace stock
     WEAK adjuster<int> cmd_argc{ 0x008930f0 };
     WEAK adjuster<char*> cmd_argv{ 0x00890bf0 };
     WEAK adjuster<float> viewangles{ 0x0143a9a0 };
-    WEAK adjuster<float> cg_zoomSensitivity{ 0x3020b5f4, BASE_CGAME_MP };
     WEAK adjuster<float> ads_progress{ 0x30207214, BASE_CGAME_MP }; // Between 0 and 1, might be cg.zoomTime
     WEAK adjuster<float> fov_visible{ 0x3020958c, BASE_CGAME_MP }; // Not the cg_fov cvar value, might be cg.zoomval
     WEAK adjuster<pmove_t*> pm{ 0x3019d570, BASE_CGAME_MP };
@@ -38,6 +37,7 @@ namespace stock
     WEAK adjuster<cvar_t[]> cvar_indexes{ 0x0163b420 };
     WEAK adjuster<netadr_t> clc_serverAddress{ 0x015ce86c };
     WEAK adjuster<netadr_t> cls_autoupdateServer{ 0x015ca57c };
+    WEAK adjuster<cg_t> cg{ 0x301e2140, BASE_CGAME_MP };
 }
 
 namespace cvars
@@ -47,8 +47,6 @@ namespace cvars
     extern stock::cvar_t* cl_allowDownload;
     extern stock::cvar_t* con_boldgamemessagetime;
     extern stock::cvar_t* com_sv_running;
-    extern stock::cvar_t* com_timescale;
-    extern stock::cvar_t* sv_cheats;
 
     namespace vm
     {

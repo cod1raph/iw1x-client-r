@@ -10,7 +10,6 @@ namespace imgui
     bool initialized = false;
     bool displayed = false;
     bool waitForMenuKeyRelease = false;
-    float indentation_checkbox_child = 12.f;
 
     HGLRC imguiWglContext;
     HWND hWnd_during_init;
@@ -22,7 +21,6 @@ namespace imgui
     bool cg_drawDisconnect = false;
     bool cg_drawWeaponSelect = false;
     bool cg_drawFPS = false;
-    bool cg_drawFPS_custom = false;
     int cg_chatHeight = 0;
     int con_boldgamemessagetime = 0;
     bool cg_lagometer = false;
@@ -31,8 +29,6 @@ namespace imgui
     float cg_fov = 0.f;
     bool cg_fovScaleEnable = false;
     float cg_fovScale = 0.f;
-    float com_timescale = 0.f;
-    bool branding = false;
     bool cg_drawPing = false;
 
     static void toggle_menu_cmd()
@@ -109,9 +105,6 @@ namespace imgui
         m_rawinput = movement::m_rawinput->integer;
         cg_fovScaleEnable = view::cg_fovScaleEnable->integer;
         cg_fovScale = view::cg_fovScale->value;
-        com_timescale = cvars::com_timescale->value;
-        branding = ui::branding->integer;
-        cg_drawFPS_custom = ui::cg_drawFPS_custom->integer;
         cg_drawPing = ui::cg_drawPing->integer;
 
         if (*stock::cgvm != NULL)
@@ -164,22 +157,18 @@ namespace imgui
         BEGINTABITEM_SPACE("UI")
 
             if (*stock::cgvm == NULL) ImGui::BeginDisabled();
-            ImGui::Checkbox("FPS counter", &cg_drawFPS);
+            ImGui::Checkbox("FPS", &cg_drawFPS);
             if (*stock::cgvm == NULL) ImGui::EndDisabled();
-            ImGui::Indent(indentation_checkbox_child);
-            ImGui::Checkbox("Custom", &cg_drawFPS_custom);
-            ImGui::Unindent(indentation_checkbox_child);
-
-            ImGui::Spacing();
 
             if (*stock::clc_demoplaying) ImGui::BeginDisabled();
             ImGui::Checkbox("Ping", &cg_drawPing);
             if (*stock::clc_demoplaying) ImGui::EndDisabled();
+
             if (*stock::cgvm == NULL || cvars::com_sv_running->integer) ImGui::BeginDisabled();
             ImGui::Checkbox("Lagometer", &cg_lagometer);
             if (*stock::cgvm == NULL || cvars::com_sv_running->integer) ImGui::EndDisabled();
 
-            ImGui::Checkbox("Connection interrupted indicator", &cg_drawDisconnect);
+            ImGui::Checkbox("Connection interrupted", &cg_drawDisconnect);
             ImGui::Checkbox("Weapon selection", &cg_drawWeaponSelect);
 
             ImGui::Spacing();
@@ -192,13 +181,9 @@ namespace imgui
 
             ImGui::Spacing();
 
-            ImGui::Text("Middle messages seconds");
+            ImGui::Text("Middle message seconds");
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             ImGui::SliderInt("##slider_con_boldgamemessagetime", &con_boldgamemessagetime, 0, 8, "%i", ImGuiSliderFlags_NoInput);
-
-            ImGui::Spacing();
-
-            ImGui::Checkbox("Branding", &branding);
 
         ENDTABITEM_SPACED()
     }
@@ -221,14 +206,6 @@ namespace imgui
             ImGui::SliderFloat("##slider_cg_fovScale", &cg_fovScale, 1.f, 1.4f, "%.2f", ImGuiSliderFlags_NoInput);
             if (!cg_fovScaleEnable) ImGui::EndDisabled();
 
-            ImGui::Spacing();
-            
-            if (*stock::cgvm == NULL || !cvars::sv_cheats->integer) ImGui::BeginDisabled();
-            ImGui::Text("Time scale");
-            ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-            ImGui::SliderFloat("##slider_com_timescale", &com_timescale, 0.1f, 5, "%.1f", ImGuiSliderFlags_NoInput);
-            if (*stock::cgvm == NULL || !cvars::sv_cheats->integer) ImGui::EndDisabled();
-
         ENDTABITEM_SPACED()
     }
 
@@ -236,7 +213,7 @@ namespace imgui
     {
         BEGINTABITEM_SPACE("Movement")
 
-            ImGui::Checkbox("Raw mouse input", &m_rawinput);
+            ImGui::Checkbox("RInput", &m_rawinput);
 
             ImGui::Spacing();
 
@@ -272,9 +249,6 @@ namespace imgui
         stock::Cvar_Set(movement::m_rawinput->name, m_rawinput ? "1" : "0");
         stock::Cvar_Set(view::cg_fovScaleEnable->name, cg_fovScaleEnable ? "1" : "0");
         stock::Cvar_Set(view::cg_fovScale->name, utils::string::va("%.2f", cg_fovScale));
-        stock::Cvar_Set(cvars::com_timescale->name, utils::string::va("%.1f", com_timescale));
-        stock::Cvar_Set(ui::cg_drawFPS_custom->name, cg_drawFPS_custom ? "1" : "0");
-        stock::Cvar_Set(ui::branding->name, branding ? "1" : "0");
         stock::Cvar_Set(ui::cg_drawPing->name, cg_drawPing ? "1" : "0");
         
         if (*stock::cgvm != NULL)

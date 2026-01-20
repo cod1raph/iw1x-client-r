@@ -50,6 +50,13 @@ namespace stock
     {
         // ...
     } stereoFrame_t;
+
+    typedef enum
+    {
+        // ...
+        PM_INTERMISSION = 0x5,
+        // ...
+    } pmtype_t;
     
     typedef struct cvar_s
     {
@@ -84,7 +91,9 @@ namespace stock
     
     typedef struct playerState_s
     {
-        byte gap_0x0[0xB0];
+        byte gap_0x0[0x4];
+        int pm_type; // 0x4
+        byte gap_0x8[0xA8];
         int weapon; // 0xB0
         byte gap_0xB4[0x40];
         statIndex_t stats[6]; // 0xf4
@@ -118,4 +127,20 @@ namespace stock
         byte ipx[10];
         unsigned short port;
     } netadr_t;
+    
+    typedef struct
+    {
+        byte gap_0x0[0xC];
+        playerState_t ps;
+        // ...
+    } snapshot_t;
+
+    typedef struct
+    {
+        byte gap_0x0[0x20];
+        snapshot_t* snap;
+        byte gap_0x24[0x29490];
+        float zoomSensitivity;
+        // ...
+    } cg_t;
 }
