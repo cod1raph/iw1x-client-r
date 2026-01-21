@@ -47,7 +47,7 @@ namespace security
         hook_CG_ServerCommand.invoke();
     }
 
-    static void stub_CL_SystemInfoChanged_Cvar_Set(const char* name, const char* value)
+    static void stub_CL_SystemInfoChanged_Cvar_Set(const char* name, const char* value) noexcept
     {
 #if 0
         std::stringstream ss;
@@ -81,7 +81,7 @@ namespace security
         hook_CL_NextDownload.invoke();
     }
 
-    bool escape_aborted_connection()
+    bool escape_aborted_connection() noexcept
     {
         if (*stock::cls_state > stock::CA_DISCONNECTED && *stock::cls_state < stock::CA_ACTIVE)
         {
@@ -94,7 +94,7 @@ namespace security
     class component final : public component_interface
     {
     public:
-        void post_unpack() override
+        void post_unpack() noexcept override
         {
             // Use a cvar whitelist for CL_SystemInfoChanged
             utils::hook::call(0x00415ffe, stub_CL_SystemInfoChanged_Cvar_Set);
@@ -103,7 +103,7 @@ namespace security
             hook_CL_NextDownload.create(0x00410190, stub_CL_NextDownload);
         }
 
-        void post_cgame() override
+        void post_cgame() noexcept override
         {
             // Use a cvar whitelist for setClientCvar GSC method
             hook_CG_ServerCommand.create(ABSOLUTE_CGAME_MP(0x3002e0d0), stub_CG_ServerCommand);

@@ -31,12 +31,12 @@ namespace imgui
     float cg_fovScale = 0.f;
     bool cg_drawPing = false;
 
-    static void toggle_menu_cmd()
+    static void toggle_menu_cmd() noexcept
     {
         toggle_menu(false);
     }
 
-    void toggle_menu(bool closedUsingButton)
+    void toggle_menu(bool closedUsingButton) noexcept
     {
         if (closedUsingButton)
         {
@@ -92,7 +92,7 @@ namespace imgui
         ImGui::NewFrame();
     }
     
-    static void menu_loads_settings()
+    static void menu_loads_settings() noexcept
     {
         sensitivity_adsScaleEnable = movement::sensitivity_adsScaleEnable->integer;
         sensitivity_adsScale = movement::sensitivity_adsScale->value;
@@ -328,12 +328,12 @@ namespace imgui
             return nullptr;
         }
 
-        void post_unpack() override
+        void post_unpack() noexcept override
         {
             stock::Cmd_AddCommand("imgui", toggle_menu_cmd);
         }
         
-        void pre_destroy() override
+        void pre_destroy() noexcept override
         {
             shutdown();
         }

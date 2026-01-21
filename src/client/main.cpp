@@ -210,7 +210,7 @@ static bool read_file(const std::string& file, std::string* data)
 static FARPROC load_binary()
 {
     loader loader;
-    utils::nt::library self;
+    const utils::nt::library self;
 
     loader.set_import_resolver([self](const std::string& library, const std::string& function) -> void*
         {

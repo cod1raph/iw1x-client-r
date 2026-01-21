@@ -58,7 +58,7 @@ namespace fixes
     class component final : public component_interface
     {
     public:
-        void post_unpack() override
+        void post_unpack() noexcept override
         {
 
             /*
@@ -78,7 +78,7 @@ namespace fixes
             hook_CL_Disconnect.create(0x0040ef90, stub_CL_Disconnect);
         }
 
-        void post_ui_mp() override
+        void post_ui_mp() noexcept override
         {
             // Prevent displaying servers twice (occurs if double click Refresh List)
             hook_UI_StartServerRefresh.create(ABSOLUTE_UI_MP(0x4000ea90), stub_UI_StartServerRefresh);

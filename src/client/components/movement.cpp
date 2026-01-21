@@ -15,7 +15,7 @@ namespace movement
         stock::cl->viewangles[stock::YAW] += 180;
     }
     
-    static float originalCGZoomSensitivity()
+    static float originalCGZoomSensitivity() noexcept
     {
         return *stock::fov_visible / cvars::vm::cg_fov->value; // See 30032fe8
     }
@@ -74,7 +74,7 @@ namespace movement
     class component final : public component_interface
     {
     public:
-        void post_unpack() override
+        void post_unpack() noexcept override
         {
             sensitivity_adsScaleEnable = stock::Cvar_Get("sensitivity_adsScaleEnable", "0", stock::CVAR_ARCHIVE);
             sensitivity_adsScale = stock::Cvar_Get("sensitivity_adsScale", "1", stock::CVAR_ARCHIVE);
@@ -85,7 +85,7 @@ namespace movement
             stock::Cmd_AddCommand("lookback", Cmd_LookBack);
         }
 
-        void post_cgame() override
+        void post_cgame() noexcept override
         {
             utils::hook::jump(ABSOLUTE_CGAME_MP(0x30032fe8), stub_CG_zoomSensitivity_calculation);
         }

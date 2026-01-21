@@ -59,12 +59,12 @@ namespace cvars
     class component final : public component_interface
     {
     public:
-        void post_unpack() override
+        void post_unpack() noexcept override
         {
             hook_CL_Init.create(0x00411e60, stub_CL_Init);
         }
 
-        void post_cgame() override
+        void post_cgame() noexcept override
         {
             hook_CG_RegisterCvars.create(ABSOLUTE_CGAME_MP(0x300205e0), stub_CG_RegisterCvars);
         }

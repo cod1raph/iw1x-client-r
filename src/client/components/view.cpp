@@ -41,13 +41,13 @@ namespace view
     class component final : public component_interface
     {
     public:
-        void post_unpack() override
+        void post_unpack() noexcept override
         {
             cg_fovScaleEnable = stock::Cvar_Get("cg_fovScaleEnable", "0", stock::CVAR_ARCHIVE);
             cg_fovScale = stock::Cvar_Get("cg_fovScale", "1", stock::CVAR_ARCHIVE);
         }
 
-        void post_cgame() override
+        void post_cgame() noexcept override
         {
             utils::hook::jump(ABSOLUTE_CGAME_MP(0x30032f2a), stub_CG_CalcFov_return);
         }

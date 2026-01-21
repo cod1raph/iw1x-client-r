@@ -6,17 +6,17 @@ namespace stock
 {
     uintptr_t addr_CL_MouseEvent = 0x0040b0a0;
 
-    int Cmd_Argc()
+    int Cmd_Argc() noexcept
     {
         return *cmd_argc;
     }
     
-    char* Cmd_Argv(int arg)
+    char* Cmd_Argv(int arg) noexcept
     {
         return cmd_argv[arg];
     }
     
-    weaponInfo_t* BG_GetInfoForWeapon(int weaponNum)
+    weaponInfo_t* BG_GetInfoForWeapon(int weaponNum) noexcept
     {
         auto cg_weapons_ptr = *reinterpret_cast<uintptr_t*>(*cg_weapons);
         return reinterpret_cast<weaponInfo_t**>(cg_weapons_ptr)[weaponNum];

@@ -23,7 +23,7 @@ namespace window
         scheduler::once([text, flags]() { MessageBox(*stock::hWnd, text.c_str(), MOD_NAME, flags); }, scheduler::async);
     }
 
-    static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
+    static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) noexcept
     {
         if (GetForegroundWindow() == *stock::hWnd)
         {
@@ -73,7 +73,7 @@ namespace window
             throw std::runtime_error("RegisterRawInputDevices failed");
     }
     
-    static void rawInput_move()
+    static void rawInput_move() noexcept
     {
         auto delta_x = rawinput_x_current - rawinput_x_old;
         auto delta_y = rawinput_y_current - rawinput_y_old;
@@ -130,7 +130,7 @@ namespace window
         hook_IN_MouseMove.invoke();
     }
     
-    static void WM_INPUT_process(LPARAM lParam)
+    static void WM_INPUT_process(LPARAM lParam) noexcept
     {
         //// Don't update raw input when:
         if (imgui::displayed)
@@ -244,7 +244,7 @@ namespace window
         SetWindowLong(*stock::hWnd, GWL_STYLE, style);
     }
 
-    static void Cmd_Minimize()
+    static void Cmd_Minimize() noexcept
     {
         ShowWindow(*stock::hWnd, SW_MINIMIZE);
     }
@@ -252,7 +252,7 @@ namespace window
     class component final : public component_interface
     {
     public:
-        void post_unpack() override
+        void post_unpack() noexcept override
         {
             stock::Cmd_AddCommand("minimize", Cmd_Minimize);
 
