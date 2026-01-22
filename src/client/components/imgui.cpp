@@ -333,7 +333,7 @@ namespace imgui
             stock::Cmd_AddCommand("imgui", toggle_menu_cmd);
         }
         
-        void pre_destroy() noexcept override
+        void pre_destroy() override
         {
             shutdown();
         }

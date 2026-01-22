@@ -18,7 +18,7 @@ public:
         static_assert(std::is_base_of<component_interface, T>::value, "component has invalid base class");
 
     public:
-        installer()
+        installer() noexcept
         {
             register_component(std::make_unique<T>());
         }

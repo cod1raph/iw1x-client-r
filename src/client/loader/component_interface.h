@@ -15,7 +15,7 @@ public:
     {
     }
 
-    virtual void pre_destroy() noexcept
+    virtual void pre_destroy()
     {
     }
 

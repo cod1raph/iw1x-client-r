@@ -302,7 +302,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
         if (!component_loader::post_load())
             return 1;
     }
-    catch (std::exception& ex)
+    catch (const std::exception& ex)
     {
         MSG_ERR(ex.what());
         return 1;
