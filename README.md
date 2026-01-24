@@ -45,8 +45,9 @@ Open a terminal on your desktop, then:
 - On top: Build > Build Solution
 - Close VS, go to `iw1x-client-r\build\bin\Release`
 
-The `iw1x-r` app is the new file to run to use the mod, it must be put in the same folder where `CoDMP` is
+The `iw1x-r` app is the new file to run to use the mod, it must be placed in the same folder as  `CoDMP`.
 
+---
 ---
 ---
 
