@@ -8,7 +8,7 @@ Based on [vCoDMods' backup](https://vcodmods.com/client/iw1x-client-source)
 Some features are:
 - ADS sensitivity scale
 - FOV scale
-- Raw mouse input
+- Raw input
 - Alt+Tab support
 - `lookback` command
 ---
