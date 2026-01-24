@@ -1,10 +1,10 @@
 namespace stock
 {
-    int Cmd_Argc() noexcept;
-    char* Cmd_Argv(int arg) noexcept;
-    weaponInfo_t* BG_GetInfoForWeapon(int weaponNum) noexcept;
-    const char* Info_ValueForKey(const char* buffer, const char* key) noexcept;
-    void CL_MouseEvent(int _dx, int _dy) noexcept;
+    int Cmd_Argc();
+    char* Cmd_Argv(int arg);
+    weaponInfo_t* BG_GetInfoForWeapon(int weaponNum);
+    const char* Info_ValueForKey(const char* buffer, const char* key);
+    void CL_MouseEvent(int _dx, int _dy);
 
     WEAK adjuster<void(float x, float y, int fontID, float scale, float* color, const char* text, float spaceBetweenChars, int maxChars, int arg9)> SCR_DrawString{ 0x004df570 };
     WEAK adjuster<cvar_t* (const char* name)> Cvar_FindVar{ 0x00439280 };

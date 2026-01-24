@@ -9,7 +9,7 @@ namespace view
     
     static float scaledFOV(float fov)
     {
-        int* flag = (int*)ABSOLUTE_CGAME_MP(0x302071dc); // Might be cg.snap->ps.eFlags
+        int* flag = (int*)ABSOLUTE_CGAME_MP(0x302071dc);
         if (*flag & stock::EF_MG42_ACTIVE)
             return 55;
 
@@ -19,7 +19,7 @@ namespace view
         return fov;
     }
     
-    static __declspec(naked) void stub_CG_CalcFov_return() noexcept
+    static __declspec(naked) void stub_CG_CalcFov_return()
     {
         __asm
         {
@@ -41,13 +41,13 @@ namespace view
     class component final : public component_interface
     {
     public:
-        void post_unpack() noexcept override
+        void post_unpack() override
         {
             cg_fovScaleEnable = stock::Cvar_Get("cg_fovScaleEnable", "0", stock::CVAR_ARCHIVE);
             cg_fovScale = stock::Cvar_Get("cg_fovScale", "1", stock::CVAR_ARCHIVE);
         }
 
-        void post_cgame() noexcept override
+        void post_cgame() override
         {
             utils::hook::jump(ABSOLUTE_CGAME_MP(0x30032f2a), stub_CG_CalcFov_return);
         }

@@ -20,7 +20,7 @@ namespace imgui
     extern bool waitForMenuKeyRelease;
 
     void menu_updates_settings();
-    void toggle_menu(bool closedUsingButton) noexcept;
+    void toggle_menu(bool closedUsingButton);
     void new_frame();
     void draw_menu();
     void draw_menu_tab_Security();

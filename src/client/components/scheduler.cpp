@@ -144,7 +144,7 @@ namespace scheduler
     class component final : public component_interface
     {
     public:
-        void post_start() noexcept override
+        void post_start() override
         {
             thread = utils::thread::create_named_thread("Async Scheduler", []()
             {
@@ -156,19 +156,19 @@ namespace scheduler
             });
         }
 
-        void post_unpack() noexcept override
+        void post_unpack() override
         {
             hook_CL_Frame.create(0x00411280, stub_CL_Frame);
             hook_SV_Frame.create(0x0045b1d0, stub_SV_Frame);
             hook_RE_EndFrame.create(0x004de4b0, stub_RE_EndFrame);
         }
         
-        void post_cgame() noexcept override
+        void post_cgame() override
         {
             hook_CG_DrawActive.create(ABSOLUTE_CGAME_MP(0x30018940), stub_CG_DrawActive);
         }
         
-        void pre_destroy() noexcept override
+        void pre_destroy() override
         {
             kill = true;
             if (thread.joinable())

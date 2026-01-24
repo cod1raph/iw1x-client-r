@@ -15,7 +15,7 @@ DWORD address_ui_mp;
 utils::hook::detour hook_GetModuleFileNameW;
 utils::hook::detour hook_GetModuleFileNameA;
 
-static void MSG_ERR(const char* msg) noexcept
+static void MSG_ERR(const char* msg)
 {
     MessageBox(NULL, msg, MOD_NAME, MB_ICONERROR | MB_SETFOREGROUND);
 }
@@ -142,7 +142,7 @@ static DWORD WINAPI stub_GetModuleFileNameW(HMODULE hModule, LPWSTR lpFilename, 
     return ret;
 }
 
-static bool compare_md5(const std::string& data, const std::string& expected_hash) noexcept
+static bool compare_md5(const std::string& data, const std::string& expected_hash)
 {
     HCRYPTPROV hProv;
     HCRYPTHASH hHash;

@@ -13,7 +13,7 @@ namespace fixes
 
     uintptr_t pfield_charevent_return = 0x40CB77;
     uintptr_t pfield_charevent_continue = 0x40CB23;
-    static __declspec(naked) void stub_Field_CharEvent_ignore_console_char() noexcept
+    static __declspec(naked) void stub_Field_CharEvent_ignore_console_char()
     {
         // See https://github.com/xtnded/codextended-client/blob/45af251518a390ab08b1c8713a6a1544b70114a1/cl_input.cpp#L77
 
@@ -58,7 +58,7 @@ namespace fixes
     class component final : public component_interface
     {
     public:
-        void post_unpack() noexcept override
+        void post_unpack() override
         {
 
             /*
@@ -78,7 +78,7 @@ namespace fixes
             hook_CL_Disconnect.create(0x0040ef90, stub_CL_Disconnect);
         }
 
-        void post_ui_mp() noexcept override
+        void post_ui_mp() override
         {
             // Prevent displaying servers twice (occurs if double click Refresh List)
             hook_UI_StartServerRefresh.create(ABSOLUTE_UI_MP(0x4000ea90), stub_UI_StartServerRefresh);

@@ -38,7 +38,7 @@ namespace test
     class component final : public component_interface
     {
     public:
-        void post_unpack() noexcept override
+        void post_unpack() override
         {
             stock::Cmd_AddCommand("test", Command_test);
 
@@ -46,7 +46,7 @@ namespace test
 
         }
         
-        void post_cgame() noexcept override
+        void post_cgame() override
         {
             //hook_Test.create(ABSOLUTE_CGAME_MP(0x30028a70), stub_Test);
 

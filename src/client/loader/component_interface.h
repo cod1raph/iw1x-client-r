@@ -3,15 +3,15 @@
 class component_interface
 {
 public:
-    virtual ~component_interface() noexcept
+    virtual ~component_interface()
     {
     }
 
-    virtual void post_start() noexcept
+    virtual void post_start()
     {
     }
 
-    virtual void post_load() noexcept
+    virtual void post_load()
     {
     }
 
@@ -19,18 +19,18 @@ public:
     {
     }
 
-    virtual void post_unpack() noexcept
+    virtual void post_unpack()
     {
     }
     
-    virtual void post_cgame() noexcept
+    virtual void post_cgame()
     {
     }
-    virtual void post_ui_mp() noexcept
+    virtual void post_ui_mp()
     {
     }
     
-    virtual void* load_import([[maybe_unused]] const std::string& library, [[maybe_unused]] const std::string& function) noexcept
+    virtual void* load_import([[maybe_unused]] const std::string& library, [[maybe_unused]] const std::string& function)
     {
         return nullptr;
     }

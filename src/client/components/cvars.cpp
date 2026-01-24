@@ -40,15 +40,11 @@ namespace cvars
 
     static void stub_CG_RegisterCvars()
     {
-        stock::cgame_mp::cvarTable[4].cvarFlags = stock::CVAR_ARCHIVE;
-
         hook_CG_RegisterCvars.invoke();
 
         /*
         TODO: Hook the loop that calls trap_Cvar_Register, to check for cvarName
-        so would not need to:
-        - know the index values
-        - change cvarFlags before calling CG_RegisterCvars
+        so would not need to know the index values
         */
         vm::cg_fov = stock::cgame_mp::cvarTable[4].vmCvar;
         vm::cg_drawFPS = stock::cgame_mp::cvarTable[11].vmCvar;
@@ -59,12 +55,12 @@ namespace cvars
     class component final : public component_interface
     {
     public:
-        void post_unpack() noexcept override
+        void post_unpack() override
         {
             hook_CL_Init.create(0x00411e60, stub_CL_Init);
         }
 
-        void post_cgame() noexcept override
+        void post_cgame() override
         {
             hook_CG_RegisterCvars.create(ABSOLUTE_CGAME_MP(0x300205e0), stub_CG_RegisterCvars);
         }

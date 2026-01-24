@@ -15,12 +15,12 @@ namespace utils::hook
         detour(size_t place, void* target);
         ~detour();
 
-        detour(detour&& other) noexcept
+        detour(detour&& other)
         {
             this->operator=(std::move(other));
         }
 
-        detour& operator=(detour&& other) noexcept
+        detour& operator=(detour&& other)
         {
             if (this != &other)
             {

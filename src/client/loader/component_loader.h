@@ -6,7 +6,7 @@ class component_loader final
 public:
     class premature_shutdown_trigger final : public std::exception
     {
-        [[nodiscard]] const char* what() const noexcept override
+        [[nodiscard]] const char* what() const override
         {
             return "Premature shutdown requested";
         }
@@ -18,7 +18,7 @@ public:
         static_assert(std::is_base_of<component_interface, T>::value, "component has invalid base class");
 
     public:
-        installer() noexcept
+        installer()
         {
             register_component(std::make_unique<T>());
         }

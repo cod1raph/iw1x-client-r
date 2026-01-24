@@ -58,7 +58,7 @@ namespace ui
     class component final : public component_interface
     {
     public:
-        void post_unpack() noexcept override
+        void post_unpack() override
         {
             cg_drawWeaponSelect = stock::Cvar_Get("cg_drawWeaponSelect", "1", stock::CVAR_ARCHIVE);
             cg_drawDisconnect = stock::Cvar_Get("cg_drawDisconnect", "1", stock::CVAR_ARCHIVE);
@@ -67,7 +67,7 @@ namespace ui
             scheduler::loop(draw_ping, scheduler::pipeline::cgame);
         }
 
-        void post_cgame() noexcept override
+        void post_cgame() override
         {
             utils::hook::jump(ABSOLUTE_CGAME_MP(0x300159CC), stub_CG_DrawDisconnect);
             utils::hook::jump(ABSOLUTE_CGAME_MP(0x300159D4), stub_CG_DrawDisconnect);

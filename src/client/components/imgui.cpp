@@ -26,17 +26,16 @@ namespace imgui
     bool cg_lagometer = false;
     bool cl_allowDownload = false;
     bool m_rawinput = false;
-    float cg_fov = 0.f;
     bool cg_fovScaleEnable = false;
     float cg_fovScale = 0.f;
     bool cg_drawPing = false;
 
-    static void toggle_menu_cmd() noexcept
+    static void toggle_menu_cmd()
     {
         toggle_menu(false);
     }
 
-    void toggle_menu(bool closedUsingButton) noexcept
+    void toggle_menu(bool closedUsingButton)
     {
         if (closedUsingButton)
         {
@@ -92,7 +91,7 @@ namespace imgui
         ImGui::NewFrame();
     }
     
-    static void menu_loads_settings() noexcept
+    static void menu_loads_settings()
     {
         sensitivity_adsScaleEnable = movement::sensitivity_adsScaleEnable->integer;
         sensitivity_adsScale = movement::sensitivity_adsScale->value;
@@ -112,7 +111,6 @@ namespace imgui
             cg_lagometer = cvars::vm::cg_lagometer->integer;
             cg_drawFPS = cvars::vm::cg_drawFPS->integer;
             cg_chatHeight = cvars::vm::cg_chatHeight->integer;
-            cg_fov = cvars::vm::cg_fov->value;
         }
     }
     
@@ -191,15 +189,7 @@ namespace imgui
     void draw_menu_tab_View()
     {
         BEGINTABITEM_SPACE("View")
-
-            if (*stock::cgvm == NULL) ImGui::BeginDisabled();
-            ImGui::Text("FOV");
-            ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
-            ImGui::SliderFloat("##slider_cg_fov", &cg_fov, 80.f, 95.f, "%.2f", ImGuiSliderFlags_NoInput);
-            if (*stock::cgvm == NULL) ImGui::EndDisabled();
-
-            ImGui::Spacing();
-
+            
             ImGui::Checkbox("FOV scale", &cg_fovScaleEnable);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             if (!cg_fovScaleEnable) ImGui::BeginDisabled();
@@ -213,7 +203,7 @@ namespace imgui
     {
         BEGINTABITEM_SPACE("Movement")
 
-            ImGui::Checkbox("RInput", &m_rawinput);
+            ImGui::Checkbox("Raw input", &m_rawinput);
 
             ImGui::Spacing();
 
@@ -257,9 +247,6 @@ namespace imgui
             /*
             TODO: Clean, see Cvar_Update
             */
-            cv = reinterpret_cast<stock::cvar_t*>(reinterpret_cast<uintptr_t>(*stock::cvar_indexes) + (0x2c * cvars::vm::cg_fov->handle));
-            stock::Cvar_Set(cv->name, utils::string::va("%.2f", cg_fov));
-            
             cv = reinterpret_cast<stock::cvar_t*>(reinterpret_cast<uintptr_t>(*stock::cvar_indexes) + (0x2c * cvars::vm::cg_drawFPS->handle));
             stock::Cvar_Set(cv->name, utils::string::va("%i", cg_drawFPS));
 
@@ -321,14 +308,14 @@ namespace imgui
     class component final : public component_interface
     {
     public:
-        void* load_import(const std::string&, const std::string& function) noexcept override
+        void* load_import(const std::string&, const std::string& function) override
         {
             if (function == "SwapBuffers")
                 return stub_SwapBuffers;
             return nullptr;
         }
 
-        void post_unpack() noexcept override
+        void post_unpack() override
         {
             stock::Cmd_AddCommand("imgui", toggle_menu_cmd);
         }
