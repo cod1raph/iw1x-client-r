@@ -1,9 +1,13 @@
-## CoD1.1 client mod
-Based on [vCoDMods' backup](https://vcodmods.com/client/iw1x-client-source)
-
+# CoD 1.1 client mod
 **Focused on improving aiming and eyesight**
 
-*-r* as my name meaning it's intended to provide only the features I'm currently interested about
+<details>
+<summary>History</summary>
+I created iw1x-client in January 2025, then deleted the GitHub repo around April.  
+  
+Thanks to Gatsby, an up to date backup got uploaded on vCoDMods, this new repo is based on it.  
+The added -r stands for my name, meaning this new version is not intended to provide all the features players would like, but only the ones I use.
+</details>
 
 Some features are:
 - ADS sensitivity scale
@@ -11,9 +15,13 @@ Some features are:
 - Raw input
 - Alt+Tab support
 - `lookback` command
+
+**Menu key: Alt+Esc**
+
 ---
 ---
-## Build and Run
+
+## Build instructions
 
 Using Windows
 - Install git: https://git-scm.com/ (leave default options)
@@ -36,14 +44,13 @@ Open a terminal on your desktop, then:
 - Select the `Release` config on top (click Debug next to Win32)
 - On top: Build > Build Solution
 - Close VS, go to `iw1x-client-r\build\bin\Release`
-- Copy `iw1x-r` app in CoD folder, next to `CoDMP`
-- Run `iw1x-r`
 
-**Menu key: Alt+Esc**
+The `iw1x-r` app is the new file to run to use the mod, it must be put in the same folder where `CoDMP` is
 
 ---
 ---
-## References
+
+### References
 - [Killtube](https://killtube.org/)
 - The [reverse engineering Discord server](https://discord.com/invite/weKN5wb)
 - [codextended-client](https://github.com/xtnded/codextended-client)
