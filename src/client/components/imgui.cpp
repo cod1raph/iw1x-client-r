@@ -10,6 +10,7 @@ namespace imgui
     bool initialized = false;
     bool displayed = false;
     bool waitForMenuKeyRelease = false;
+    float indentation_checkbox_child = 12.f;
 
     HGLRC imguiWglContext;
     HWND hWnd_during_init;
@@ -21,6 +22,7 @@ namespace imgui
     bool cg_drawDisconnect = false;
     bool cg_drawWeaponSelect = false;
     bool cg_drawFPS = false;
+    bool cg_drawFPS_custom = false;
     int cg_chatHeight = 0;
     int con_boldgamemessagetime = 0;
     bool cg_lagometer = false;
@@ -105,6 +107,7 @@ namespace imgui
         cg_fovScaleEnable = view::cg_fovScaleEnable->integer;
         cg_fovScale = view::cg_fovScale->value;
         cg_drawPing = ui::cg_drawPing->integer;
+        cg_drawFPS_custom = ui::cg_drawFPS_custom->integer;
 
         if (*stock::cgvm != NULL)
         {
@@ -157,6 +160,13 @@ namespace imgui
             if (*stock::cgvm == NULL) ImGui::BeginDisabled();
             ImGui::Checkbox("FPS", &cg_drawFPS);
             if (*stock::cgvm == NULL) ImGui::EndDisabled();
+            ImGui::Indent(indentation_checkbox_child);
+            if (!cg_drawFPS) ImGui::BeginDisabled();
+            ImGui::Checkbox("Small", &cg_drawFPS_custom);
+            if (!cg_drawFPS) ImGui::EndDisabled();
+            ImGui::Unindent(indentation_checkbox_child);
+
+            ImGui::Spacing();
 
             if (*stock::clc_demoplaying) ImGui::BeginDisabled();
             ImGui::Checkbox("Ping", &cg_drawPing);
@@ -193,7 +203,7 @@ namespace imgui
             ImGui::Checkbox("FOV scale", &cg_fovScaleEnable);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             if (!cg_fovScaleEnable) ImGui::BeginDisabled();
-            ImGui::SliderFloat("##slider_cg_fovScale", &cg_fovScale, 1.f, 1.4f, "%.2f", ImGuiSliderFlags_NoInput);
+            ImGui::SliderFloat("##slider_cg_fovScale", &cg_fovScale, 1.f, 1.25f, "%.2f", ImGuiSliderFlags_NoInput);
             if (!cg_fovScaleEnable) ImGui::EndDisabled();
 
         ENDTABITEM_SPACED()
@@ -211,7 +221,7 @@ namespace imgui
             ImGui::Checkbox("ADS sensitivity scale", &sensitivity_adsScaleEnable);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             if (!sensitivity_adsScaleEnable) ImGui::BeginDisabled();
-            ImGui::SliderFloat("##slider_sensitivity_adsScale", &sensitivity_adsScale, 0.15f, 1.f, "%.2f", ImGuiSliderFlags_NoInput);
+            ImGui::SliderFloat("##slider_sensitivity_adsScale", &sensitivity_adsScale, 0.15f, 1.f, "%.1f", ImGuiSliderFlags_NoInput);
             if (!sensitivity_adsScaleEnable) ImGui::EndDisabled();
 
             ImGui::Spacing();
@@ -220,7 +230,7 @@ namespace imgui
             ImGui::Checkbox("ADS sensitivity scale [sniper]", &sensitivity_adsScaleSniperEnable);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             if (!sensitivity_adsScaleSniperEnable) ImGui::BeginDisabled();
-            ImGui::SliderFloat("##slider_sensitivity_adsScaleSniper", &sensitivity_adsScaleSniper, 0.15f, 1.f, "%.2f", ImGuiSliderFlags_NoInput);
+            ImGui::SliderFloat("##slider_sensitivity_adsScaleSniper", &sensitivity_adsScaleSniper, 0.15f, 1.f, "%.1f", ImGuiSliderFlags_NoInput);
             if (!sensitivity_adsScaleSniperEnable) ImGui::EndDisabled();
 
         ENDTABITEM_SPACED()
@@ -240,6 +250,7 @@ namespace imgui
         stock::Cvar_Set(view::cg_fovScaleEnable->name, cg_fovScaleEnable ? "1" : "0");
         stock::Cvar_Set(view::cg_fovScale->name, utils::string::va("%.2f", cg_fovScale));
         stock::Cvar_Set(ui::cg_drawPing->name, cg_drawPing ? "1" : "0");
+        stock::Cvar_Set(ui::cg_drawFPS_custom->name, cg_drawFPS_custom ? "1" : "0");
         
         if (*stock::cgvm != NULL)
         {

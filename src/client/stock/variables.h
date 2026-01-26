@@ -54,5 +54,6 @@ namespace cvars
         extern stock::vmCvar_t* cg_fov;
         extern stock::vmCvar_t* cg_drawFPS;
         extern stock::vmCvar_t* cg_chatHeight;
+        extern stock::vmCvar_t* cg_drawFPS;
     }
 }
