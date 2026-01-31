@@ -221,7 +221,7 @@ namespace imgui
             ImGui::Checkbox("ADS sensitivity scale", &sensitivity_adsScaleEnable);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             if (!sensitivity_adsScaleEnable) ImGui::BeginDisabled();
-            ImGui::SliderFloat("##slider_sensitivity_adsScale", &sensitivity_adsScale, 0.15f, 1.f, "%.1f", ImGuiSliderFlags_NoInput);
+            ImGui::SliderFloat("##slider_sensitivity_adsScale", &sensitivity_adsScale, 0.2f, 0.9f, "%.1f", ImGuiSliderFlags_NoInput);
             if (!sensitivity_adsScaleEnable) ImGui::EndDisabled();
 
             ImGui::Spacing();
@@ -230,7 +230,7 @@ namespace imgui
             ImGui::Checkbox("ADS sensitivity scale [sniper]", &sensitivity_adsScaleSniperEnable);
             ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x);
             if (!sensitivity_adsScaleSniperEnable) ImGui::BeginDisabled();
-            ImGui::SliderFloat("##slider_sensitivity_adsScaleSniper", &sensitivity_adsScaleSniper, 0.15f, 1.f, "%.1f", ImGuiSliderFlags_NoInput);
+            ImGui::SliderFloat("##slider_sensitivity_adsScaleSniper", &sensitivity_adsScaleSniper, 0.2f, 0.9f, "%.1f", ImGuiSliderFlags_NoInput);
             if (!sensitivity_adsScaleSniperEnable) ImGui::EndDisabled();
 
         ENDTABITEM_SPACED()

@@ -8,7 +8,7 @@
 Size found using Ghidra
 IMAGE_NT_HEADERS32 -> IMAGE_OPTIONAL_HEADER32 -> SizeOfStackReserve
 */
-#pragma comment(linker, "/stack:0x800000")
+#pragma comment(linker, "/stack:0x800000") // Figured out this was required for "cg_drawCrosshairNames" to work.
 
 // Windows
 #pragma comment(lib, "dbghelp.lib")

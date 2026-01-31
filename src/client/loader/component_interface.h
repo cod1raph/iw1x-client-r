@@ -3,9 +3,7 @@
 class component_interface
 {
 public:
-    virtual ~component_interface()
-    {
-    }
+    virtual ~component_interface() = default;
 
     virtual void post_start()
     {
