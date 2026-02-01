@@ -40,7 +40,7 @@ namespace fixes
         hook_UI_StartServerRefresh.invoke(full);
     }
 
-    static char* stub_CL_SetServerInfo_hostname_strncpy(char* dest, const char* src, int destsize)
+    static char* stub_strncpy_remove_squares_hostname(char* dest, const char* src, int destsize)
     {
 #pragma warning(push)
 #pragma warning(disable: 4996)
@@ -60,7 +60,6 @@ namespace fixes
     public:
         void post_unpack() override
         {
-
             /*
             Prevent the CD Key error when joining a server (occurs when joined a fs_game server previously)
             ("CD Key is not valid. Please enter...")
@@ -69,8 +68,9 @@ namespace fixes
             utils::hook::nop(0x0042d122, 5);
 
             // Prevent displaying squares in server name (occurs when hostname contains e.g. SOH chars)
-            utils::hook::call(0x412A2C, stub_CL_SetServerInfo_hostname_strncpy);
-
+            utils::hook::call(0x412A2C, stub_strncpy_remove_squares_hostname); // CL_SetServerInfo
+            utils::hook::call(0x0041333b, stub_strncpy_remove_squares_hostname); // CL_ServerStatus
+            
             // Prevent inserting the char of the console key in the text field (e.g. Superscript Two gets inserted using french keyboard)
             utils::hook::jump(0x40CB1E, stub_Field_CharEvent_ignore_console_char);
 

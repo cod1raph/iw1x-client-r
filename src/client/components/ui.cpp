@@ -34,7 +34,7 @@ namespace ui
             return;
         
         int* clSnap_ping = (int*)0x0143b148; // TODO: Verify and clean
-        //int* cl_snap_ping = (int*)0x01432978;
+        //int* cl_snap_ping = (int*)0x01432978; // cl.snap.ping
         
         constexpr auto background_width = 50;
         constexpr auto background_height = 15;
