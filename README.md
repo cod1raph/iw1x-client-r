@@ -1,3 +1,4 @@
+Old version: https://vcodmods.com/client/iw1x-client-source
 # CoD 1.1 client mod
 **Focused on improving aiming and eyesight**
 
@@ -8,8 +9,6 @@ Some features are:
 - `lookback` command
 
 **Menu key: Alt+Esc**
-
-Original version: https://vcodmods.com/client/iw1x-client-source
 
 ---
 ---
