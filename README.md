@@ -9,6 +9,8 @@ Some features are:
 
 **Menu key: Alt+Esc**
 
+Original version: https://vcodmods.com/client/iw1x-client-source
+
 ---
 ---
 
