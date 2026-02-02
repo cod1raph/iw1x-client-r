@@ -106,8 +106,9 @@ static DWORD WINAPI stub_GetModuleFileNameA(HMODULE hModule, LPSTR lpFilename, D
 {
     auto* orig = static_cast<decltype(GetModuleFileNameA)*>(hook_GetModuleFileNameA.get_original());
     auto ret = orig(hModule, lpFilename, nSize);
-    
-    if (!strcmp(PathFindFileNameA(lpFilename), "iw1x-r.exe"))
+
+    std::string mod_filename = std::string(MOD_NAME) + ".exe";
+    if (!strcmp(PathFindFileNameA(lpFilename), mod_filename.c_str()))
     {
         std::filesystem::path path = lpFilename;
         auto binary = get_client_filename();
@@ -128,7 +129,8 @@ static DWORD WINAPI stub_GetModuleFileNameW(HMODULE hModule, LPWSTR lpFilename, 
     std::string pathStr(required_size - 1, '\0');
     WideCharToMultiByte(CP_UTF8, 0, lpFilename, -1, pathStr.data(), required_size, nullptr, nullptr);
 
-    if (!strcmp(PathFindFileNameA(pathStr.c_str()), "iw1x-r.exe"))
+    std::string mod_filename = std::string(MOD_NAME) + ".exe";
+    if (!strcmp(PathFindFileNameA(pathStr.c_str()), mod_filename.c_str()))
     {
         std::filesystem::path pathFs = pathStr;
 
