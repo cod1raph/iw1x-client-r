@@ -1,19 +1,10 @@
 # CoD 1.1 client mod
 **Focused on improving aiming and eyesight**
 
-<details>
-<summary>History</summary>
-I created iw1x-client in January 2025, then deleted the GitHub repo around April.  
-  
-Thanks to Gatsby, an up to date backup got uploaded on vCoDMods, this new repo is based on it.  
-The added -r stands for my name, meaning this new version is not intended to provide all the features players would like, but only the ones I use.
-</details>
-
 Some features are:
 - ADS sensitivity scale
 - FOV scale
 - Raw input
-- Alt+Tab support
 - `lookback` command
 
 **Menu key: Alt+Esc**
