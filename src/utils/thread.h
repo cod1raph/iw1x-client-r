@@ -4,7 +4,6 @@
 #include "_string.h"
 
 #include <thread>
-#include <gsl/gsl>
 
 namespace utils::thread
 {

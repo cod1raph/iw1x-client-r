@@ -216,12 +216,12 @@ static FARPROC load_binary()
 
     loader.set_import_resolver([self](const std::string& library, const std::string& function) -> void*
         {
-            if (function == "ExitProcess")
-                return stub_ExitProcess;
             if (function == "GetProcAddress")
                 return stub_GetProcAddress;
             if (function == "LoadLibraryA")
                 return stub_LoadLibraryA;
+            if (function == "ExitProcess")
+                return stub_ExitProcess;
 
             return component_loader::load_import(library, function);
         });
@@ -283,13 +283,6 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
         // Transfer lpCmdLine to the window component for stub_Com_Init
         strncpy_s(window::sys_cmdline, cmdLine.c_str(), sizeof(window::sys_cmdline));
     }
-    
-    auto premature_shutdown = true;
-    const auto _ = gsl::finally([&premature_shutdown]()
-        {
-            if (premature_shutdown)
-                component_loader::pre_destroy();
-        });
 
     FARPROC entry_point;
     try
@@ -309,7 +302,6 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
         MSG_ERR(ex.what());
         return 1;
     }
-    
-    CreateMutexA(NULL, TRUE, MOD_NAME);
+
     return static_cast<int>(entry_point());
 }

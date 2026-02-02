@@ -4,10 +4,12 @@
 
 FARPROC loader::load(const utils::nt::library& library, const std::string& buffer) const
 {
-    if (buffer.empty()) return nullptr;
+    if (buffer.empty())
+        return nullptr;
 
     const utils::nt::library source(HMODULE(buffer.data()));
-    if (!source) return nullptr;
+    if (!source)
+        return nullptr;
 
     this->load_sections(library, source);
     this->load_imports(library, source);
@@ -52,7 +54,6 @@ void loader::load_sections(const utils::nt::library& target, const utils::nt::li
 void loader::load_imports(const utils::nt::library& target, const utils::nt::library& source) const
 {
     auto* const import_directory = &source.get_optional_header()->DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT];
-
     auto* descriptor = PIMAGE_IMPORT_DESCRIPTOR(target.get_ptr() + import_directory->VirtualAddress);
     
     while (descriptor->Name)
@@ -63,9 +64,7 @@ void loader::load_imports(const utils::nt::library& target, const utils::nt::lib
         auto* address_table_entry = reinterpret_cast<uintptr_t*>(target.get_ptr() + descriptor->FirstThunk);
         
         if (!descriptor->OriginalFirstThunk)
-        {
             name_table_entry = reinterpret_cast<uintptr_t*>(target.get_ptr() + descriptor->FirstThunk);
-        }
 
         while (*name_table_entry)
         {
@@ -89,20 +88,18 @@ void loader::load_imports(const utils::nt::library& target, const utils::nt::lib
             ss << "###### " << function_name << std::endl;
             OutputDebugString(ss.str().c_str());
 #endif
-            if (this->import_resolver_) function = FARPROC(this->import_resolver_(name, function_name));
+            if (this->import_resolver_)
+                function = FARPROC(this->import_resolver_(name, function_name));
+
             if (!function)
             {
                 auto library = utils::nt::library::load(name);
                 if (library)
-                {
                     function = GetProcAddress(library, function_procname);
-                }
             }
 
             if (!function)
-            {
                 throw std::runtime_error(utils::string::va("Unable to load import '%s' from library '%s'", function_name.data(), name.data()));
-            }
 
             utils::hook::set(address_table_entry, reinterpret_cast<uintptr_t>(function));
 

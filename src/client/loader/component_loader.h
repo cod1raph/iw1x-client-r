@@ -18,7 +18,7 @@ public:
         static_assert(std::is_base_of<component_interface, T>::value, "component has invalid base class");
 
     public:
-        installer()
+        installer() noexcept
         {
             register_component(std::make_unique<T>());
         }
@@ -46,8 +46,6 @@ public:
     static void pre_destroy();
 
     static void* load_import(const std::string& library, const std::string& function);
-
-    static void trigger_premature_shutdown();
 
 private:
     static std::vector<std::unique_ptr<component_interface>>& get_components();

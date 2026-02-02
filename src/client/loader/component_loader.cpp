@@ -22,7 +22,6 @@ bool component_loader::post_start()
     {
         return false;
     }
-
     return true;
 }
 
@@ -41,16 +40,11 @@ bool component_loader::post_load()
     {
         return false;
     }
-
     return true;
 }
 
 void component_loader::post_unpack()
 {
-    static auto handled = false;
-    if (handled) return;
-    handled = true;
-
     for (const auto& component : get_components())
         component->post_unpack();
 }
@@ -68,10 +62,6 @@ void component_loader::post_ui_mp()
 
 void component_loader::pre_destroy()
 {
-    static auto handled = false;
-    if (handled) return;
-    handled = true;
-
     for (const auto& component : get_components())
         component->pre_destroy();
 }
@@ -90,21 +80,8 @@ void* component_loader::load_import(const std::string& library, const std::strin
     return function_ptr;
 }
 
-void component_loader::trigger_premature_shutdown()
-{
-    throw premature_shutdown_trigger();
-}
-
 std::vector<std::unique_ptr<component_interface>>& component_loader::get_components()
 {
-    using component_vector = std::vector<std::unique_ptr<component_interface>>;
-    using component_vector_container = std::unique_ptr<component_vector, std::function<void(component_vector*)>>;
-
-    static component_vector_container components(new component_vector, [](component_vector* component_vector)
-        {
-            pre_destroy();
-            delete component_vector;
-        });
-
-    return *components;
+    static std::vector<std::unique_ptr<component_interface>> components;
+    return components;
 }

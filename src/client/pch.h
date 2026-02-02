@@ -1,26 +1,21 @@
 #pragma once
 
 #define WIN32_LEAN_AND_MEAN
-#define NOMINMAX
 
 // Windows
 #include <Windows.h>
 #include <atlbase.h>
 #include <dbghelp.h>
-#include <TlHelp32.h>
 #include <wincrypt.h>
 
 // C++
 #include <cassert>
-#include <filesystem>
 #include <fstream>
-#include <mutex>
 #include <queue>
 #include <sstream>
 #include <string>
 
 // Submodules
-#include <gsl/gsl>
 #include <MinHook.h>
 
 /*

@@ -12,7 +12,6 @@ IMAGE_NT_HEADERS32 -> IMAGE_OPTIONAL_HEADER32 -> SizeOfStackReserve
 
 // Windows
 #pragma comment(lib, "dbghelp.lib")
-#pragma comment(lib, "ntdll.lib")
 #pragma comment(lib, "opengl32.lib")
 
 char payload_data[BINARY_PAYLOAD_SIZE];
