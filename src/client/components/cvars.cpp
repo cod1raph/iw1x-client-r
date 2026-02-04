@@ -40,6 +40,16 @@ namespace cvars
 
     static void stub_CG_RegisterCvars()
     {
+#if 0
+        int i;
+        stock::cvarTable_t* cv;
+        for (i = 0, cv = stock::cgame_mp::cvarTable; i < 0xad; i++, cv++)
+        {
+            std::stringstream ss;
+            ss << "####### " << cv->cvarName << " = i: " << i << std::endl;
+            OutputDebugString(ss.str().c_str());
+        }
+#endif
         hook_CG_RegisterCvars.invoke();
 
         /*

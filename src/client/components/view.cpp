@@ -38,6 +38,13 @@ namespace view
         }
     }
     
+    stock::cvar_t* stub_Cvar_Get_fx_draw(const char* name, const char* value, int flags)
+    {
+        flags &= ~stock::CVAR_CHEAT;
+        flags |= stock::CVAR_ARCHIVE;
+        return stock::Cvar_Get(name, value, flags);
+    }
+    
     class component final : public component_interface
     {
     public:
@@ -45,6 +52,9 @@ namespace view
         {
             cg_fovScaleEnable = stock::Cvar_Get("cg_fovScaleEnable", "0", stock::CVAR_ARCHIVE);
             cg_fovScale = stock::Cvar_Get("cg_fovScale", "1", stock::CVAR_ARCHIVE);
+            
+            // Unlock "fx_draw" cvar to help against fps drops, and allow archiving.
+            utils::hook::call(0x00412457, stub_Cvar_Get_fx_draw);
         }
 
         void post_cgame() override
