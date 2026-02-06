@@ -70,40 +70,12 @@ namespace movement
             ret
         }
     }
-
-    static void stub_CL_MouseEvent_CG_apply(int x, int y)
-    {
-        if (m_rawinput->integer)
-        {
-            x = window::rawinput_x_current - window::rawinput_x_old;
-            y = window::rawinput_y_current - window::rawinput_y_old;
-
-            window::rawinput_x_old = window::rawinput_x_current;
-            window::rawinput_y_old = window::rawinput_y_current;
-        }
-
-        stock::cl->mouseIndex[stock::cl->mouseDx] += x;
-        stock::cl->mouseIndex[stock::cl->mouseDy] += y;
-    }
-    static __declspec(naked) void stub_CL_MouseEvent_CG()
-    {
-        __asm
-        {
-            push eax // y
-            push ecx // x
-            call stub_CL_MouseEvent_CG_apply
-            add esp, 8
-            retn
-        }
-    }
     
     class component final : public component_interface
     {
     public:
         void post_unpack() override
         {
-            utils::hook::jump(0x0040b0e0, stub_CL_MouseEvent_CG); // To apply raw input
-
             sensitivity_adsScaleEnable = stock::Cvar_Get("sensitivity_adsScaleEnable", "0", stock::CVAR_ARCHIVE);
             sensitivity_adsScale = stock::Cvar_Get("sensitivity_adsScale", "1", stock::CVAR_ARCHIVE);
             sensitivity_adsScaleSniperEnable = stock::Cvar_Get("sensitivity_adsScaleSniperEnable", "0", stock::CVAR_ARCHIVE);

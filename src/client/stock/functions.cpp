@@ -4,6 +4,8 @@
 
 namespace stock
 {
+    uintptr_t addr_CL_MouseEvent = 0x0040b0a0;
+
     int Cmd_Argc()
     {
         return *cmd_argc;
@@ -28,6 +30,18 @@ namespace stock
             mov ecx, buffer;
             mov eax, 0x0044ada0;
             call eax;
+        }
+    }
+    
+    void CL_MouseEvent(int _dx, int _dy)
+    {
+        __asm
+        {
+            mov ecx, _dx;
+            push eax;
+            mov eax, _dy;
+            call addr_CL_MouseEvent;
+            add esp, 0x4;
         }
     }
 }

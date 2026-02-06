@@ -16,11 +16,6 @@
 
 namespace window
 {
-    extern int rawinput_x_current;
-    extern int rawinput_y_current;
-    extern int rawinput_x_old;
-    extern int rawinput_y_old;
-    
     extern char sys_cmdline[stock::MAX_STRING_CHARS];
 
     void MSG(const std::string& text, UINT flags = MB_OK);

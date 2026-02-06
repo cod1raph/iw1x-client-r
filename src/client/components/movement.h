@@ -4,8 +4,6 @@
 
 #include "loader/component_loader.h"
 
-#include "window.h"
-
 namespace movement
 {
     extern stock::cvar_t* sensitivity_adsScaleEnable;

@@ -146,10 +146,7 @@ namespace stock
     
     typedef struct
     {
-        byte gap_0x0[0x7FE8];
-        int mouseDx[2], mouseDy[2];
-        int mouseIndex;
-        byte gap_0x143a95c[0x44];
+        byte gap_0x0[0x8040];
         vec3_t viewangles;
         // ...
     } clientActive_t;

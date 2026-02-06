@@ -87,10 +87,8 @@ namespace utils::hook
         FlushInstructionCache(GetCurrentProcess(), place, length);
     }
 
-    void nop(const size_t place, size_t length)
+    void nop(const size_t place, const size_t length)
     {
-        // See https://github.com/xtnded/codextended-client/blob/3993dd9b9f44c63d6cdfc58f1ec40ca3e1e84d69/mem_util.h#L85
-        length = (length < place) ? length : (length - place);
         nop(reinterpret_cast<void*>(place), length);
     }
     
