@@ -70,64 +70,7 @@ namespace window
         if (!RegisterRawInputDevices(rid, ARRAYSIZE(rid), sizeof(rid[0])))
             throw std::runtime_error("RegisterRawInputDevices failed");
     }
-    
-    static void rawInput_move()
-    {
-        auto delta_x = rawinput_x_current - rawinput_x_old;
-        auto delta_y = rawinput_y_current - rawinput_y_old;
 
-        rawinput_x_old = rawinput_x_current;
-        rawinput_y_old = rawinput_y_current;
-        
-        POINT cursorPos;
-        GetCursorPos(&cursorPos);
-        stock::CL_MouseEvent(delta_x, delta_y);
-    }
-    
-    static void stub_IN_MouseMove()
-    {
-        // Apply raw input only when player can move // TODO: Maybe hook CG_MouseEvent instead then
-        if (movement::m_rawinput->integer)
-        {
-            if (*stock::cls_keyCatchers == 0) // TODO: Figure out why have to use "== 0" instead of "& KEYCATCH_CGAME"
-            {
-                rawInput_move();
-                return;
-            }
-
-            // If a .menu is displayed, and cl_bypassMouseInput is enabled, player can move (e.g. wm_quickmessage.menu)
-            if ((*stock::cls_keyCatchers & stock::KEYCATCH_UI) && cvars::cl_bypassMouseInput->integer)
-            {
-                rawInput_move();
-                return;
-            }
-            
-            if (cvars::r_fullscreen->integer && *stock::cgvm != NULL)
-            {
-                // .menu + console opened = player can't move
-                if (*stock::cls_keyCatchers == 3)
-                {
-                    hook_IN_MouseMove.invoke();
-                    return;
-                }
-
-                if (*stock::cls_keyCatchers & stock::KEYCATCH_CONSOLE)
-                {
-                    rawInput_move();
-                    return;
-                }
-            }
-
-            if (*stock::cls_keyCatchers & stock::KEYCATCH_MESSAGE)
-            {
-                rawInput_move();
-                return;
-            }
-        }
-
-        hook_IN_MouseMove.invoke();
-    }
-    
     static void WM_INPUT_process(LPARAM lParam)
     {
         //// Don't update raw input when:
@@ -232,7 +175,6 @@ namespace window
             utils::hook::set(0x5083b1, 0x00); // Alt+Tab support, see https://github.com/xtnded/codextended-client/pull/1
             
             hook_Com_Init.create(0x004375c0, stub_Com_Init);
-            hook_IN_MouseMove.create(0x00461850, stub_IN_MouseMove);
         }
     };
 }
