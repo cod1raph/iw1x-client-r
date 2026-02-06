@@ -32,11 +32,6 @@ namespace imgui
     float cg_fovScale = 0.f;
     bool cg_drawPing = false;
 
-    static void toggle_menu_cmd()
-    {
-        toggle_menu(false);
-    }
-
     void toggle_menu(bool closedUsingButton)
     {
         if (closedUsingButton)
@@ -315,11 +310,6 @@ namespace imgui
             return nullptr;
         }
 
-        void post_unpack() override
-        {
-            stock::Cmd_AddCommand("imgui", toggle_menu_cmd);
-        }
-        
         void pre_destroy() override
         {
             if (initialized)

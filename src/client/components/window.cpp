@@ -10,11 +10,11 @@ namespace window
     int rawinput_y_current = 0;
     int rawinput_x_old = 0;
     int rawinput_y_old = 0;
+    
     char sys_cmdline[stock::MAX_STRING_CHARS];
     HHOOK hHook;
 
     utils::hook::detour hook_Com_Init;
-    utils::hook::detour hook_IN_MouseMove;
 
     void MSG(const std::string& text, UINT flags)
     {
@@ -60,72 +60,6 @@ namespace window
         return CallNextHookEx(hHook, nCode, wParam, lParam);
     }
     
-    static void rawInput_init(HWND hWnd)
-    {
-        RAWINPUTDEVICE rid[1]{};
-        rid[0].usUsagePage = HID_USAGE_PAGE_GENERIC;
-        rid[0].usUsage = HID_USAGE_GENERIC_MOUSE;
-        rid[0].dwFlags = RIDEV_INPUTSINK;
-        rid[0].hwndTarget = hWnd;
-        if (!RegisterRawInputDevices(rid, ARRAYSIZE(rid), sizeof(rid[0])))
-            throw std::runtime_error("RegisterRawInputDevices failed");
-    }
-    
-    static void rawInput_move()
-    {
-        auto delta_x = rawinput_x_current - rawinput_x_old;
-        auto delta_y = rawinput_y_current - rawinput_y_old;
-
-        rawinput_x_old = rawinput_x_current;
-        rawinput_y_old = rawinput_y_current;
-        
-        stock::CL_MouseEvent(delta_x, delta_y);
-    }
-    
-    static void stub_IN_MouseMove()
-    {
-        // Apply raw input only when player can move // TODO: Maybe hook CG_MouseEvent instead then
-        if (movement::m_rawinput->integer)
-        {
-            if (*stock::cls_keyCatchers == 0) // TODO: Figure out why have to use "== 0" instead of "& KEYCATCH_CGAME"
-            {
-                rawInput_move();
-                return;
-            }
-
-            // If a .menu is displayed, and cl_bypassMouseInput is enabled, player can move (e.g. wm_quickmessage.menu)
-            if ((*stock::cls_keyCatchers & stock::KEYCATCH_UI) && cvars::cl_bypassMouseInput->integer)
-            {
-                rawInput_move();
-                return;
-            }
-            
-            if (cvars::r_fullscreen->integer && *stock::cgvm != NULL)
-            {
-                // .menu + console opened = player can't move
-                if (*stock::cls_keyCatchers == 3)
-                {
-                    hook_IN_MouseMove.invoke();
-                    return;
-                }
-
-                if (*stock::cls_keyCatchers & stock::KEYCATCH_CONSOLE)
-                {
-                    rawInput_move();
-                    return;
-                }
-            }
-
-            if (*stock::cls_keyCatchers & stock::KEYCATCH_MESSAGE)
-            {
-                rawInput_move();
-                return;
-            }
-        }
-
-        hook_IN_MouseMove.invoke();
-    }
-    
     static void WM_INPUT_process(LPARAM lParam)
     {
         //// Don't update raw input when:
@@ -143,10 +77,10 @@ namespace window
         ////
         
         UINT dwSize = sizeof(RAWINPUT);
-        static RAWINPUT raw;
-        GetRawInputData(reinterpret_cast<HRAWINPUT>(lParam), RID_INPUT, &raw, &dwSize, sizeof(RAWINPUTHEADER));
-        rawinput_x_current += raw.data.mouse.lLastX;
-        rawinput_y_current += raw.data.mouse.lLastY;
+        static RAWINPUT rawinput;
+        GetRawInputData(reinterpret_cast<HRAWINPUT>(lParam), RID_INPUT, &rawinput, &dwSize, sizeof(RAWINPUTHEADER));
+        rawinput_x_current += rawinput.data.mouse.lLastX;
+        rawinput_y_current += rawinput.data.mouse.lLastY;
     }
     
     static LRESULT CALLBACK stub_MainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -160,9 +94,19 @@ namespace window
             WM_INPUT_process(lParam);
             return true;
         case WM_CREATE:
+        {
             SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) | WS_MINIMIZEBOX);
-            rawInput_init(hWnd);
+            
+            RAWINPUTDEVICE rid[1]{};
+            rid[0].usUsagePage = HID_USAGE_PAGE_GENERIC;
+            rid[0].usUsage = HID_USAGE_GENERIC_MOUSE;
+            rid[0].dwFlags = RIDEV_INPUTSINK;
+            rid[0].hwndTarget = hWnd;
+            if (!RegisterRawInputDevices(rid, ARRAYSIZE(rid), sizeof(rid[0])))
+                MSG("RegisterRawInputDevices failed", MB_ICONERROR);
+
             break;
+        }
         case WM_CHAR:
             if (wParam == VK_ESCAPE && imgui::displayed)
                 imgui::toggle_menu(false);
@@ -230,7 +174,6 @@ namespace window
             utils::hook::set(0x5083b1, 0x00); // Alt+Tab support, see https://github.com/xtnded/codextended-client/pull/1
             
             hook_Com_Init.create(0x004375c0, stub_Com_Init);
-            hook_IN_MouseMove.create(0x00461850, stub_IN_MouseMove);
         }
     };
 }
