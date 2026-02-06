@@ -41,7 +41,7 @@ namespace imgui
     {
         if (closedUsingButton)
         {
-            *stock::mouseInitialized = stock::qtrue;
+            stock::s_wmv->mouseInitialized = stock::qtrue;
             stock::IN_ActivateMouse();
             return;
         }
@@ -50,13 +50,13 @@ namespace imgui
         {
             displayed = true;
             stock::IN_DeactivateMouse();
-            *stock::mouseActive = stock::qfalse;
-            *stock::mouseInitialized = stock::qfalse;
+            stock::s_wmv->mouseActive = stock::qfalse;
+            stock::s_wmv->mouseInitialized = stock::qfalse;
         }
         else
         {
             displayed = false;
-            *stock::mouseInitialized = stock::qtrue;
+            stock::s_wmv->mouseInitialized = stock::qtrue;
             stock::IN_ActivateMouse();
         }
     }
@@ -276,17 +276,6 @@ namespace imgui
         ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
     }
     
-    static void shutdown()
-    {
-        if (initialized)
-        {
-            ImGui_ImplOpenGL2_Shutdown();
-            ImGui_ImplWin32_Shutdown();
-            ImGui::DestroyContext();
-            initialized = false;
-        }
-    }
-    
     static BOOL WINAPI stub_SwapBuffers(HDC hdc)
     {
         if (!initialized)
@@ -333,7 +322,13 @@ namespace imgui
         
         void pre_destroy() override
         {
-            shutdown();
+            if (initialized)
+            {
+                ImGui_ImplOpenGL2_Shutdown();
+                ImGui_ImplWin32_Shutdown();
+                ImGui::DestroyContext();
+                initialized = false;
+            }
         }
     };
 }

@@ -30,8 +30,6 @@ namespace stock
     WEAK adjuster<qboolean> refreshActive{ 0x401EA698, BASE_UI_MP };
     WEAK adjuster<qboolean> clc_demoplaying{ 0x015ef004 };
     WEAK adjuster<vm_t*> cgvm{ 0x01617348 };
-    WEAK adjuster<qboolean> mouseActive{ 0x8e2520 };
-    WEAK adjuster<qboolean> mouseInitialized{ 0x8e2524 };
     WEAK adjuster<connstate_t> cls_state{ 0x155F2C0 };
     WEAK adjuster<qboolean> clc_demorecording{ 0x015ef000 };
     WEAK adjuster<cvar_t[]> cvar_indexes{ 0x0163b420 };
@@ -39,6 +37,7 @@ namespace stock
     WEAK adjuster<netadr_t> cls_autoupdateServer{ 0x015ca57c };
     WEAK adjuster<cg_t> cg{ 0x301e2140, BASE_CGAME_MP };
     WEAK adjuster<clientActive_t> cl{ 0x01432960 };
+    WEAK adjuster<WinMouseVars_t> s_wmv{ 0x008e251c };
 }
 
 namespace cvars

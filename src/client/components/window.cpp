@@ -79,8 +79,6 @@ namespace window
         rawinput_x_old = rawinput_x_current;
         rawinput_y_old = rawinput_y_current;
         
-        POINT cursorPos;
-        GetCursorPos(&cursorPos);
         stock::CL_MouseEvent(delta_x, delta_y);
     }
     

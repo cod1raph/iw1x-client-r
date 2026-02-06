@@ -150,4 +150,11 @@ namespace stock
         vec3_t viewangles;
         // ...
     } clientActive_t;
+    
+    typedef struct
+    {
+        byte gap_0x0[0x4];
+        qboolean mouseActive;
+        qboolean mouseInitialized;
+    } WinMouseVars_t;
 }
