@@ -16,7 +16,7 @@ Some features are:
 ## Build instructions
 
 Using Windows
-- Install git: https://git-scm.com/ (leave default options)
+- Install git: https://git-scm.com/
 - Install Visual Studio Community: https://visualstudio.microsoft.com/vs/community/
 
 In Visual Studio Installer > Individual components, install these:
@@ -27,17 +27,15 @@ In Visual Studio Installer > Individual components, install these:
 
 Open a terminal on your desktop, then:
 
-- `git clone https://github.com/cod1raph/iw1x-client-r.git`
-- `cd iw1x-client-r`
-- `git submodule update --init --recursive`
-- Close terminal, open `generate.bat`
-- In `build` folder, open `iw1x-client-r.sln`
+- Enter `git clone --recurse-submodules https://github.com/cod1raph/iw1x-client-r.git`
+- Open the generated folder named `iw1x-client-r`, then open `generate.bat`
+- Open `build` folder, then open `iw1x-client-r.sln`
 - Ignore setup assistant
 - Select the `Release` config on top (click Debug next to Win32)
-- On top: Build > Build Solution
-- Close VS, go to `iw1x-client-r\build\bin\Release`
+- On top, click: Build > Build Solution
+- Close VS, open this folder: `build\bin\Release`
 
-The `iw1x-r` app is the new file to run to use the mod, it must be placed in the same folder as  `CoDMP`.
+The `iw1x-r` exectuable file must be copied in the same folder as `CoDMP`, open it to use the mod.
 
 ---
 ---
