@@ -1,6 +1,6 @@
 Old version: https://vcodmods.com/client/iw1x-client-source
 # CoD 1.1 client mod
-**Focused on improving aiming and eyesight**
+**Focused on improving aiming, eyesight, and security**
 
 Some features are:
 - ADS sensitivity scale
