@@ -51,8 +51,9 @@ namespace fixes
     
     static void stub_CL_Disconnect(stock::qboolean showMainMenu)
     {
-        stock::Cvar_Set("timescale", "1");
         hook_CL_Disconnect.invoke(showMainMenu);
+        stock::Cvar_Set("timescale", "1");
+        stock::Cvar_Set("fs_game", "");
     }
     
     class component final : public component_interface
@@ -74,7 +75,8 @@ namespace fixes
             // Prevent inserting the char of the console key in the text field (e.g. Superscript Two gets inserted using french keyboard)
             utils::hook::jump(0x40CB1E, stub_Field_CharEvent_ignore_console_char);
 
-            // Prevent timescale remaining modified after leaving server/demo
+            // Reset timescale cvar after leaving server
+            // Reset fs_game cvar after leaving server
             hook_CL_Disconnect.create(0x0040ef90, stub_CL_Disconnect);
         }
 
