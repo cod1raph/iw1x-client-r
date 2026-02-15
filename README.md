@@ -1,4 +1,4 @@
-Old version: https://vcodmods.com/client/iw1x-client-source
+Based on: https://vcodmods.com/client/iw1x-client-source
 # CoD 1.1 client mod
 **Focused on improving aiming, eyesight, and security**
 
