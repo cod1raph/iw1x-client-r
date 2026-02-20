@@ -54,9 +54,13 @@ namespace security
         ss << "####### stub_CL_SystemInfoChanged_Cvar_Set: " << name << std::endl;
         OutputDebugString(ss.str().c_str());
 #endif
-
+        
         if (!cvarIsInWhitelist(name))
-            return;
+            // If client has cl_allowDownload enabled, but sv_allowDownload is disabled, client will attempt to download anyway, and then fail joining.
+            // So allow server to disable cl_allowDownload to prevent trying to download and then failing joining.
+            if (!_stricmp(name, "cl_allowDownload") && strcmp(value, "0"))
+                return;
+
         stock::Cvar_Set(name, value);
     }
 
