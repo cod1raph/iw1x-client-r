@@ -84,6 +84,9 @@ namespace fixes
         {
             // Prevent displaying servers twice (occurs if double click Refresh List)
             hook_UI_StartServerRefresh.create(ABSOLUTE_UI_MP(0x4000ea90), stub_UI_StartServerRefresh);
+
+            // Prevent removing the 8 first chars of path when downloading
+            utils::hook::nop(ABSOLUTE_UI_MP(0x4000e13a), 3);
         }
     };
 }
