@@ -1,6 +1,6 @@
 #include "pch.h"
 #if 1
-#include "window.h"
+#include "window.hpp"
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 

@@ -1,14 +1,14 @@
 #pragma once
 
-#include "shared.h"
+#include "shared.hpp"
 
-#include "_string.h"
+#include "string.hpp"
 
-#include "loader/component_loader.h"
+#include "loader/component_loader.hpp"
 
-#include "ui.h"
-#include "movement.h"
-#include "view.h"
+#include "ui.hpp"
+#include "movement.hpp"
+#include "view.hpp"
 
 #include <imgui.h>
 #include <backends/imgui_impl_opengl2.h>

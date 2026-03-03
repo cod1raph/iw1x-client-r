@@ -1,10 +1,10 @@
 #include "pch.h"
 #if 1
-#include "shared.h"
+#include "shared.hpp"
 
-#include "hook.h"
+#include "hook.hpp"
 
-#include "loader/component_loader.h"
+#include "loader/component_loader.hpp"
 
 namespace fixes
 {
@@ -87,6 +87,7 @@ namespace fixes
 
             // Prevent removing the 8 first chars of path when downloading
             utils::hook::nop(ABSOLUTE_UI_MP(0x4000e13a), 3);
+            utils::hook::nop(ABSOLUTE_UI_MP(0x4000e155), 3);
         }
     };
 }

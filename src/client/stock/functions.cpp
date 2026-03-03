@@ -1,6 +1,6 @@
 #include "pch.h"
 
-#include "shared.h"
+#include "shared.hpp"
 
 namespace stock
 {

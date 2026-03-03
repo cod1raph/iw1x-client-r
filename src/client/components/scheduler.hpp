@@ -1,12 +1,12 @@
 #pragma once
 
-#include "shared.h"
+#include "shared.hpp"
 
-#include "hook.h"
-#include "concurrency.h"
-#include "thread.h"
+#include "hook.hpp"
+#include "concurrency.hpp"
+#include "thread.hpp"
 
-#include "loader/component_loader.h"
+#include "loader/component_loader.hpp"
 
 namespace scheduler
 {

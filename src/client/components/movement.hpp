@@ -1,10 +1,10 @@
-#include "shared.h"
+#include "shared.hpp"
 
-#include "hook.h"
+#include "hook.hpp"
 
-#include "loader/component_loader.h"
+#include "loader/component_loader.hpp"
 
-#include "window.h"
+#include "window.hpp"
 
 namespace movement
 {

@@ -76,7 +76,7 @@ targetname "iw1x-r"
 pchheader "pch.h"
 pchsource "../src/client/pch.cpp"
 includedirs { "../src/client", "../src/utils" }
-files { "../src/client/**.h", "../src/client/**.cpp", "../src/client/**.rc" }
+files { "../src/client/**.h", "../src/client/**.hpp", "../src/client/**.cpp", "../src/client/**.rc" }
 links { "utils" }
 linkoptions
 { 
@@ -89,10 +89,10 @@ submodules.imports()
 -- Project: utils
 project "utils"
 kind "StaticLib"
-files { "../src/utils/**.h", "../src/utils/**.cpp" }
+files { "../src/utils/**.hpp", "../src/utils/**.cpp" }
 vpaths
 {
-	["Header Files/*"] = { "../src/utils/**.h" },
+	["Header Files/*"] = { "../src/utils/**.hpp" },
 	["Source Files/*"] = { "../src/utils/**.cpp" }
 }
 submodules.imports()

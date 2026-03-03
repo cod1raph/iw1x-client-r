@@ -1,7 +1,7 @@
 #pragma once
 
-#include "nt.h"
-#include "_string.h"
+#include "nt.hpp"
+#include "string.hpp"
 
 #include <thread>
 

@@ -1,8 +1,8 @@
 #include "pch.h"
 #if 1
-#include "security.h"
+#include "security.hpp"
 
-#include "window.h"
+#include "window.hpp"
 
 namespace security
 {

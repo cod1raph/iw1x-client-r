@@ -1,7 +1,7 @@
 #pragma once
 
-#include "nt.h"
-#include "memory.h"
+#include "nt.hpp"
+#include "memory.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>

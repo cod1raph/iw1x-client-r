@@ -1,6 +1,6 @@
-#include "hook.h"
-#include "nt.h"
-#include "_string.h"
+#include "hook.hpp"
+#include "nt.hpp"
+#include "string.hpp"
 
 class loader final
 {

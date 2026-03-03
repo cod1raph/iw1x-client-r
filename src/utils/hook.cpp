@@ -1,4 +1,4 @@
-#include "hook.h"
+#include "hook.hpp"
 
 namespace utils::hook
 {
