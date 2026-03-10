@@ -53,8 +53,12 @@ namespace view
             cg_fovScaleEnable = stock::Cvar_Get("cg_fovScaleEnable", "0", stock::CVAR_ARCHIVE);
             cg_fovScale = stock::Cvar_Get("cg_fovScale", "1", stock::CVAR_ARCHIVE);
             
-            // Unlock "fx_draw" cvar to help against fps drops, and allow archiving.
+            // Unlock "fx_draw" cvar to help against fps drops, and allow its archiving.
             utils::hook::call(0x00412457, stub_Cvar_Get_fx_draw);
+            
+            // Increase min number of segments in RB_SurfaceCylinder, so big cylinders look more rounded.
+            utils::hook::set<uint8_t>(0x00511403 + 2, 0x10);
+            utils::hook::set(0x0051140c + 4, 0x10);
         }
 
         void post_cgame() override
