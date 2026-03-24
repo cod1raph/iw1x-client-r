@@ -1,3 +1,6 @@
+> [!NOTE]
+> Menu: Alt+Esc
+
 Based on: https://vcodmods.com/client/iw1x-client-source
 # CoD 1.1 client mod
 **Focused on improving aiming, eyesight, and security**
@@ -7,8 +10,6 @@ Some features are:
 - FOV scale
 - Raw input
 - `lookback` command
-
-**Menu key: Alt+Esc**
 
 ---
 ---
