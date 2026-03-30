@@ -57,7 +57,15 @@ namespace stock
         PM_INTERMISSION = 0x5,
         // ...
     } pmtype_t;
-    
+
+    typedef enum
+    {
+        PRINT_ALL,
+        PRINT_DEVELOPER,
+        PRINT_WARNING,
+        PRINT_ERROR
+    } printParm_t;
+
     typedef struct cvar_s
     {
         char* name;

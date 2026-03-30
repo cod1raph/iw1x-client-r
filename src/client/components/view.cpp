@@ -47,7 +47,7 @@ namespace view
             cg_fovScale = stock::Cvar_Get("cg_fovScale", "1", stock::CVAR_ARCHIVE);
             
             // Increase min number of segments in RB_SurfaceCylinder, so big cylinders look more rounded.
-            const int minSegments = 32;
+            constexpr auto minSegments = 32;
             utils::hook::set<uint8_t>(0x00511403 + 2, static_cast<uint8_t>(minSegments));
             utils::hook::set(0x0051140c + 4, minSegments);
         }

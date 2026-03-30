@@ -10,6 +10,7 @@ namespace fixes
 {
     utils::hook::detour hook_UI_StartServerRefresh;
     utils::hook::detour hook_CL_Disconnect;
+    utils::hook::detour hook_CL_RefPrintf;
 
     uintptr_t pfield_charevent_return = 0x40CB77;
     uintptr_t pfield_charevent_continue = 0x40CB23;
@@ -55,6 +56,29 @@ namespace fixes
         stock::Cvar_Set("timescale", "1");
         stock::Cvar_Set("fs_game", "");
     }
+
+    static void stub_CL_RefPrintf(int print_level, const char* fmt, ...)
+    {
+        va_list argptr;
+        char msg[stock::MAXPRINTMSG];
+
+        va_start(argptr, fmt);
+        vsnprintf_s(msg, sizeof(msg), _TRUNCATE, fmt, argptr);
+        va_end(argptr);
+
+        if (print_level == stock::PRINT_ALL)
+        {
+            stock::Com_Printf("%s", msg);
+        }
+        else if (print_level == stock::PRINT_WARNING)
+        {
+            stock::Com_Printf("%s%s", stock::S_COLOR_YELLOW, msg);
+        }
+        else if (print_level == stock::PRINT_DEVELOPER)
+        {
+            stock::Com_Printf("%s%s", stock::S_COLOR_RED, msg);
+        }
+    }
     
     class component final : public component_interface
     {
@@ -78,6 +102,9 @@ namespace fixes
             // Reset timescale cvar after leaving server
             // Reset fs_game cvar after leaving server
             hook_CL_Disconnect.create(0x0040ef90, stub_CL_Disconnect);
+
+            // Fix printing of OpenGL extensions causing "Buffer overrun" on some PCs
+            hook_CL_RefPrintf.create(0x00411460, stub_CL_RefPrintf);
         }
 
         void post_ui_mp() override

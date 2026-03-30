@@ -47,11 +47,6 @@ static LONG WINAPI CrashLogger(EXCEPTION_POINTERS* exceptionPointers)
     return EXCEPTION_EXECUTE_HANDLER;
 }
 
-static std::string get_client_filename()
-{
-    return clientNamedMohaa ? "mohaa.exe" : "CoDMP.exe";
-}
-
 static void enable_dpi_awareness()
 {
     const utils::nt::library user32{ "user32.dll" };
@@ -76,11 +71,11 @@ static FARPROC WINAPI stub_GetProcAddress(const HMODULE hModule, const LPCSTR lp
 static HMODULE WINAPI stub_LoadLibraryA(LPCSTR lpLibFileName)
 {
     auto ret = LoadLibraryA(lpLibFileName);
-    auto hModule_address = (DWORD)GetModuleHandleA(lpLibFileName);
+    const auto hModule_address = (DWORD)GetModuleHandleA(lpLibFileName);
 
     if (lpLibFileName != NULL)
     {
-        auto fileName = PathFindFileNameA(lpLibFileName);
+        const auto fileName = PathFindFileNameA(lpLibFileName);
         if (!strcmp(fileName, "cgame_mp_x86.dll"))
         {
             address_cgame_mp = hModule_address;
@@ -96,22 +91,21 @@ static HMODULE WINAPI stub_LoadLibraryA(LPCSTR lpLibFileName)
 }
 
 /*
-Return original client filename, so GPU driver knows what game it is,
+Return original client filename, so the GPU driver can know what game it is,
 so if it has a profile for it, it will get enabled
-(this prevents buffer overrun when glGetString(GL_EXTENSIONS) gets called)
 */
 // For AMD and Intel HD Graphics
 static DWORD WINAPI stub_GetModuleFileNameA(HMODULE hModule, LPSTR lpFilename, DWORD nSize)
 {
     auto* orig = static_cast<decltype(GetModuleFileNameA)*>(hook_GetModuleFileNameA.get_original());
-    auto ret = orig(hModule, lpFilename, nSize);
+    const auto ret = orig(hModule, lpFilename, nSize);
 
     std::string mod_filename = std::string(MOD_NAME) + ".exe";
     if (!strcmp(PathFindFileNameA(lpFilename), mod_filename.c_str()))
     {
         std::filesystem::path path = lpFilename;
-        auto binary = get_client_filename();
-        path.replace_filename(binary);
+        auto client_filename = "CoDMP.exe";
+        path.replace_filename(client_filename);
         std::string pathStr = path.string();
         std::copy(pathStr.begin(), pathStr.end(), lpFilename);
         lpFilename[pathStr.size()] = '\0';
@@ -133,7 +127,7 @@ static DWORD WINAPI stub_GetModuleFileNameW(HMODULE hModule, LPWSTR lpFilename, 
     {
         std::filesystem::path pathFs = pathStr;
 
-        auto client_filename = get_client_filename();
+        auto client_filename = "CoDMP.exe";
         pathFs.replace_filename(client_filename);
         pathStr = pathFs.string();
 
@@ -229,12 +223,11 @@ static FARPROC load_binary()
     hook_GetModuleFileNameW.create(kernel32.get_proc<DWORD(WINAPI*)(HMODULE, LPWSTR, DWORD)>("GetModuleFileNameW"), stub_GetModuleFileNameW);
     hook_GetModuleFileNameA.create(kernel32.get_proc<DWORD(WINAPI*)(HMODULE, LPSTR, DWORD)>("GetModuleFileNameA"), stub_GetModuleFileNameA);
     
+    auto client_filename = "CoDMP.exe";
     // Check if CoDMP is named mohaa
     std::filesystem::path currentPath_mohaa_test = std::filesystem::current_path() / "mohaa.exe";
     if (std::ifstream(currentPath_mohaa_test.string()).good())
-        clientNamedMohaa = true;
-
-    auto client_filename = get_client_filename();
+        client_filename = "mohaa.exe";
 
     std::string data_codmp;
 

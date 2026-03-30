@@ -21,4 +21,6 @@ namespace stock
     WEAK adjuster<void(float x, float y, float width, float height, qhandle_t hShader)> CG_DrawPic{ 0x300192d0, BASE_CGAME_MP };
     WEAK adjuster<int(vm_t* vm, int callnum, ...)> VM_Call{ 0x00460480 };
     WEAK adjuster<void(float x, float y, const char* s, float alpha)> CG_DrawBigString{ 0x30019710, BASE_CGAME_MP };
+    WEAK adjuster<void(const char* fmt, ...)> Com_Printf{ 0x004357b0 };
+    WEAK adjuster<void(const char* fmt, ...)> Com_DPrintf{ 0x00435820 };
 }

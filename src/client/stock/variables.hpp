@@ -12,6 +12,9 @@ namespace stock
     constexpr auto EF_MG42_ACTIVE = 0xc000;
     constexpr auto YAW = 1;
     constexpr auto FPS_FRAMES = 32;
+    constexpr auto MAXPRINTMSG = 4096;
+    constexpr auto S_COLOR_RED = "^1";
+    constexpr auto S_COLOR_YELLOW = "^3";
     
     namespace cgame_mp
     {
